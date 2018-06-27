@@ -5,6 +5,8 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -15,37 +17,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")
-    , @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")
-    , @NamedQuery(name = "Users.findByUserType", query = "SELECT u FROM Users u WHERE u.userType = :userType")
-    , @NamedQuery(name = "Users.findByUserLogin", query = "SELECT u FROM Users u WHERE u.userLogin = :userLogin")
-    , @NamedQuery(name = "Users.findByReferer", query = "SELECT u FROM Users u WHERE u.referer = :referer")
-    , @NamedQuery(name = "Users.findByIsRoot", query = "SELECT u FROM Users u WHERE u.isRoot = :isRoot")
-    , @NamedQuery(name = "Users.findByCompanyId", query = "SELECT u FROM Users u WHERE u.companyId = :companyId")
-    , @NamedQuery(name = "Users.findByLastLogin", query = "SELECT u FROM Users u WHERE u.lastLogin = :lastLogin")
-    , @NamedQuery(name = "Users.findByTimestamp", query = "SELECT u FROM Users u WHERE u.timestamp = :timestamp")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findBySalt", query = "SELECT u FROM Users u WHERE u.salt = :salt")
-    , @NamedQuery(name = "Users.findByFirstname", query = "SELECT u FROM Users u WHERE u.firstname = :firstname")
-    , @NamedQuery(name = "Users.findByLastname", query = "SELECT u FROM Users u WHERE u.lastname = :lastname")
-    , @NamedQuery(name = "Users.findByCompany", query = "SELECT u FROM Users u WHERE u.company = :company")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone")
-    , @NamedQuery(name = "Users.findByFax", query = "SELECT u FROM Users u WHERE u.fax = :fax")
-    , @NamedQuery(name = "Users.findByUrl", query = "SELECT u FROM Users u WHERE u.url = :url")
-    , @NamedQuery(name = "Users.findByTaxExempt", query = "SELECT u FROM Users u WHERE u.taxExempt = :taxExempt")
-    , @NamedQuery(name = "Users.findByLangCode", query = "SELECT u FROM Users u WHERE u.langCode = :langCode")
-    , @NamedQuery(name = "Users.findByBirthday", query = "SELECT u FROM Users u WHERE u.birthday = :birthday")
-    , @NamedQuery(name = "Users.findByPurchaseTimestampFrom", query = "SELECT u FROM Users u WHERE u.purchaseTimestampFrom = :purchaseTimestampFrom")
-    , @NamedQuery(name = "Users.findByPurchaseTimestampTo", query = "SELECT u FROM Users u WHERE u.purchaseTimestampTo = :purchaseTimestampTo")
-    , @NamedQuery(name = "Users.findByResponsibleEmail", query = "SELECT u FROM Users u WHERE u.responsibleEmail = :responsibleEmail")
-    , @NamedQuery(name = "Users.findByLastPasswords", query = "SELECT u FROM Users u WHERE u.lastPasswords = :lastPasswords")
-    , @NamedQuery(name = "Users.findByPasswordChangeTimestamp", query = "SELECT u FROM Users u WHERE u.passwordChangeTimestamp = :passwordChangeTimestamp")
-    , @NamedQuery(name = "Users.findByApiKey", query = "SELECT u FROM Users u WHERE u.apiKey = :apiKey")
-    , @NamedQuery(name = "Users.findByJanrainIdentifier", query = "SELECT u FROM Users u WHERE u.janrainIdentifier = :janrainIdentifier")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +24,7 @@ public class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
     @Basic(optional = false)
     @Column(name = "status")
     private Character status;
@@ -139,11 +110,11 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Integer userId) {
+    public Users(Long userId) {
         this.userId = userId;
     }
 
-    public Users(Integer userId, Character status, Character userType, String userLogin, String referer, Character isRoot, int companyId, int lastLogin, int timestamp, String password, String salt, String firstname, String lastname, String company, String email, String phone, String fax, String url, Character taxExempt, String langCode, int birthday, int purchaseTimestampFrom, int purchaseTimestampTo, String responsibleEmail, String lastPasswords, int passwordChangeTimestamp, String apiKey, String janrainIdentifier) {
+    public Users(Long userId, Character status, Character userType, String userLogin, String referer, Character isRoot, int companyId, int lastLogin, int timestamp, String password, String salt, String firstname, String lastname, String company, String email, String phone, String fax, String url, Character taxExempt, String langCode, int birthday, int purchaseTimestampFrom, int purchaseTimestampTo, String responsibleEmail, String lastPasswords, int passwordChangeTimestamp, String apiKey, String janrainIdentifier) {
         this.userId = userId;
         this.status = status;
         this.userType = userType;
@@ -174,11 +145,11 @@ public class Users implements Serializable {
         this.janrainIdentifier = janrainIdentifier;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

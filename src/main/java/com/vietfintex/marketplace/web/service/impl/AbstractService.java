@@ -11,8 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Transactional
-public abstract class AbstractService<T extends Serializable> implements IOperations<T> {
-
+public abstract class AbstractService<T extends Serializable, K extends Serializable> implements IOperations<T, K> {
     @Override
     @Transactional(readOnly = true)
     public T findOne(final Long id) {
@@ -21,7 +20,8 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 
     @Override
     @Transactional(readOnly = true)
-    public List<T> findAll() {
+    public List<K> findAll() {
+
         return Lists.newArrayList(getDao().findAll());
     }
 
