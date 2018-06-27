@@ -1,8 +1,10 @@
-package com.vietfintex.marketplace.persistence.service.common;
+package com.vietfintex.marketplace.web.service.impl;
 
+import com.google.common.collect.Lists;
+import com.vietfintex.marketplace.web.service.IOperations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -11,18 +13,16 @@ import java.util.List;
 @Transactional
 public abstract class AbstractService<T extends Serializable> implements IOperations<T> {
 
-    // read - one
-
     @Override
     @Transactional(readOnly = true)
-    public T findOne(final long id) {
+    public T findOne(final Long id) {
         return getDao().findById(id).orElse(null);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAll() {
-        return getDao().findAll();
+        return Lists.newArrayList(getDao().findAll());
     }
 
     @Override
@@ -52,6 +52,6 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
         getDao().deleteById(entityId);
     }
 
-    protected abstract JpaRepository<T, Long> getDao();
+    protected abstract PagingAndSortingRepository<T, Long> getDao();
 
 }

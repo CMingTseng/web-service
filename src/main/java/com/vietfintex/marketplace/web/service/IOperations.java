@@ -1,4 +1,4 @@
-package com.vietfintex.marketplace.persistence.service.common;
+package com.vietfintex.marketplace.web.service;
 
 import org.springframework.data.domain.Page;
 
@@ -9,7 +9,7 @@ public interface IOperations<T extends Serializable> {
 
     // read - one
 
-    T findOne(final long id);
+    T findOne(final Long id);
 
     // read - all
 
