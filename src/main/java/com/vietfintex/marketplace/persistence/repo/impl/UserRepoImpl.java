@@ -1,20 +1,24 @@
 package com.vietfintex.marketplace.persistence.repo.impl;
 
+import com.vietfintex.marketplace.persistence.model.User;
 import com.vietfintex.marketplace.persistence.repo.UserCustomRepo;
-import com.vietfintex.marketplace.web.dto.UserDTO;
+import org.apache.commons.collections.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 public class UserRepoImpl implements UserCustomRepo {
     @PersistenceContext
     private EntityManager em;
 
 //    @Override
-//    public UserDTO findByUserId(Long userId) {
-//        Query query = em.createQuery("SELECT u.userId, u.userType, u.userLogin, u.url, u.taxExempt, u.phone, u.lastLogin, u.lastname, u.firstname, u.birthday, u.email, u.companyId, u.company, u.apiKey, u.isRoot, u.timestamp, u.passwordChangeTimestamp, u.responsibleEmail FROM Users u WHERE u.userId = :userId AND u.status = 'A'", UserDTO.class);
-//        query.setParameter("userId", userId);
-//        return (UserDTO) query.getSingleResult();
+//    public User findByUserLogin(String username, String password) {
+//        Query query = em.createQuery("SELECT u FROM User u LEFT JOIN UserProfile p WHERE u.userName = :username and u.password = :password AND u.status = 'A'", User.class);
+//        query.setParameter("username", username);
+//        query.setParameter("password", password);
+//        List<User> userList = query.getResultList();
+//        return CollectionUtils.isEmpty(userList) ? null : userList.get(0);
 //    }
 }

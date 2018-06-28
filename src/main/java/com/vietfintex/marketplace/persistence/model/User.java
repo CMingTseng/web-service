@@ -1,54 +1,125 @@
-package com.vietfintex.marketplace.web.dto;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.vietfintex.marketplace.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.vietfintex.marketplace.persistence.model.UserProfile;
-import com.vietfintex.marketplace.util.ExcludeFieldMapper;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Dell
  */
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class UserDTO implements Serializable {
+@Entity
+@Table(name = "user")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "user_id")
     private Long userId;
+    @Column(name = "status")
     private String status;
+    @Column(name = "user_type")
     private String userType;
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "referer")
     private String referer;
+    @Column(name = "is_root")
     private String isRoot;
+    @Column(name = "company_id")
     private Integer companyId;
+    @Basic(optional = false)
+    @Column(name = "last_login")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastLogin;
+    @Basic(optional = false)
+    @Column(name = "timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
-
-    @ExcludeFieldMapper
+    @Column(name = "password")
     private String password;
+    @Column(name = "salt")
     private String salt;
+    @Column(name = "firstname")
     private String firstname;
+    @Column(name = "lastname")
     private String lastname;
+    @Column(name = "company")
     private String company;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "fax")
     private String fax;
+    @Column(name = "url")
     private String url;
+    @Column(name = "tax_exempt")
     private String taxExempt;
+    @Column(name = "lang_code")
     private String langCode;
+    @Basic(optional = false)
+    @Column(name = "birthday")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
+    @Basic(optional = false)
+    @Column(name = "purchase_timestamp_from")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date purchaseTimestampFrom;
+    @Basic(optional = false)
+    @Column(name = "purchase_timestamp_to")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date purchaseTimestampTo;
+    @Column(name = "responsible_email")
     private String responsibleEmail;
+    @Column(name = "last_passwords")
     private String lastPasswords;
+    @Basic(optional = false)
+    @Column(name = "password_change_timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date passwordChangeTimestamp;
+    @Column(name = "api_key")
     private String apiKey;
+    @Column(name = "janrain_identifier")
     private String janrainIdentifier;
     @Column(name = "sex")
     private String sex;
+
+    public User() {
+    }
+
+    public User(Long userId) {
+        this.userId = userId;
+    }
+
+    public User(Long userId, Date lastLogin, Date timestamp, Date birthday, Date purchaseTimestampFrom, Date purchaseTimestampTo, Date passwordChangeTimestamp) {
+        this.userId = userId;
+        this.lastLogin = lastLogin;
+        this.timestamp = timestamp;
+        this.birthday = birthday;
+        this.purchaseTimestampFrom = purchaseTimestampFrom;
+        this.purchaseTimestampTo = purchaseTimestampTo;
+        this.passwordChangeTimestamp = passwordChangeTimestamp;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public Long getUserId() {
         return userId;
@@ -274,11 +345,9 @@ public class UserDTO implements Serializable {
         this.janrainIdentifier = janrainIdentifier;
     }
 
-    public String getSex() {
-        return sex;
+    @Override
+    public String toString() {
+        return "com.vietfintex.marketplace.model.User[ userId=" + userId + " ]";
     }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+    
 }
