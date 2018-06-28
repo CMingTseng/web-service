@@ -2,6 +2,7 @@ package com.vietfintex.marketplace.web.controller;
 
 import com.vietfintex.marketplace.persistence.model.Users;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
+import com.vietfintex.marketplace.web.dto.UserDTO;
 import com.vietfintex.marketplace.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class UserController {
                 response.setErrorMessage("userId must be not null");
                 return response;
             }
-            Users users = userService.findOne(userId);
+            UserDTO users = userService.findOne(userId);
             response.setSuccess(true);
             response.setObjectReturn(users);
         } catch (Exception e) {
@@ -34,14 +35,11 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDTO register(@RequestBody final Users user) {
+    public ResponseDTO register(@RequestBody final UserDTO user) {
         ResponseDTO response = new ResponseDTO(false);
         try {
-            ResponseDTO validate = userService.validate(user);
-            if (!validate.isSuccess()){
-                return validate;
-            }
-            Users users = userService.create(user);
+            userService.validate(user);
+            UserDTO users = userService.register(user);
             response.setSuccess(true);
             response.setObjectReturn(users);
         } catch (Exception e) {

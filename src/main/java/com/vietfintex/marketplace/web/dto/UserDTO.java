@@ -1,6 +1,7 @@
 package com.vietfintex.marketplace.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.vietfintex.marketplace.util.ExcludeFieldMapper;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,19 +11,19 @@ import java.io.Serializable;
  *
  * @author Dell
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long userId;
-    private Character status;
-    private Character userType;
+    private String status;
+    private String userType;
     private String userLogin;
     private String referer;
-    private Character isRoot;
-    private int companyId;
-    private int lastLogin;
-    private int timestamp;
+    private String isRoot;
+    private Long companyId;
+    private Long lastLogin;
+    private Long timestamp;
     private String firstname;
     private String lastname;
     private String company;
@@ -30,18 +31,24 @@ public class UserDTO implements Serializable {
     private String phone;
     private String fax;
     private String url;
-    private Character taxExempt;
-    private int birthday;
-    private int purchaseTimestampFrom;
-    private int purchaseTimestampTo;
+    private String taxExempt;
+    private Long birthday;
+    private Long purchaseTimestampFrom;
+    private Long purchaseTimestampTo;
     private String responsibleEmail;
     private String lastPasswords;
-    private int passwordChangeTimestamp;
+    private Long passwordChangeTimestamp;
     private String apiKey;
     private String janrainIdentifier;
+    @ExcludeFieldMapper
+    private String password;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getUserId() {
@@ -52,19 +59,19 @@ public class UserDTO implements Serializable {
         this.userId = userId;
     }
 
-    public Character getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Character getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(Character userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
@@ -84,35 +91,35 @@ public class UserDTO implements Serializable {
         this.referer = referer;
     }
 
-    public Character getIsRoot() {
+    public String getIsRoot() {
         return isRoot;
     }
 
-    public void setIsRoot(Character isRoot) {
+    public void setIsRoot(String isRoot) {
         this.isRoot = isRoot;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
-    public int getLastLogin() {
+    public Long getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(int lastLogin) {
+    public void setLastLogin(Long lastLogin) {
         this.lastLogin = lastLogin;
     }
 
-    public int getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -172,35 +179,35 @@ public class UserDTO implements Serializable {
         this.url = url;
     }
 
-    public Character getTaxExempt() {
+    public String getTaxExempt() {
         return taxExempt;
     }
 
-    public void setTaxExempt(Character taxExempt) {
+    public void setTaxExempt(String taxExempt) {
         this.taxExempt = taxExempt;
     }
 
-    public int getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
 
-    public int getPurchaseTimestampFrom() {
+    public Long getPurchaseTimestampFrom() {
         return purchaseTimestampFrom;
     }
 
-    public void setPurchaseTimestampFrom(int purchaseTimestampFrom) {
+    public void setPurchaseTimestampFrom(Long purchaseTimestampFrom) {
         this.purchaseTimestampFrom = purchaseTimestampFrom;
     }
 
-    public int getPurchaseTimestampTo() {
+    public Long getPurchaseTimestampTo() {
         return purchaseTimestampTo;
     }
 
-    public void setPurchaseTimestampTo(int purchaseTimestampTo) {
+    public void setPurchaseTimestampTo(Long purchaseTimestampTo) {
         this.purchaseTimestampTo = purchaseTimestampTo;
     }
 
@@ -220,11 +227,11 @@ public class UserDTO implements Serializable {
         this.lastPasswords = lastPasswords;
     }
 
-    public int getPasswordChangeTimestamp() {
+    public Long getPasswordChangeTimestamp() {
         return passwordChangeTimestamp;
     }
 
-    public void setPasswordChangeTimestamp(int passwordChangeTimestamp) {
+    public void setPasswordChangeTimestamp(Long passwordChangeTimestamp) {
         this.passwordChangeTimestamp = passwordChangeTimestamp;
     }
 

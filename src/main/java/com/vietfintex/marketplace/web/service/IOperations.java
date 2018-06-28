@@ -5,25 +5,25 @@ import org.springframework.data.domain.Page;
 import java.io.Serializable;
 import java.util.List;
 
-public interface IOperations<T extends Serializable, K extends Serializable> {
+public interface IOperations<Model extends Serializable, DTO extends Serializable> {
 
     // read - one
 
-    K findOne(final Long id);
+    DTO findOne(final Long id);
 
     // read - all
 
-    List<K> findAll();
+    List<DTO> findAll();
 
-    Page<K> findPaginated(int page, int size);
+//    Page<DTO> findPaginated(int page, int size);
 
     // write
 
-    K create(final T entity);
+    DTO create(final Model entity);
 
-    K update(final T entity);
+    DTO update(final Model entity);
 
-    void delete(final T entity);
+    void delete(final Model entity);
 
     void deleteById(final long entityId);
 

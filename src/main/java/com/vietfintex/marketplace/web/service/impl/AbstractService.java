@@ -1,9 +1,7 @@
 package com.vietfintex.marketplace.web.service.impl;
 
-import com.google.common.collect.Lists;
+import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.service.IOperations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,39 +9,40 @@ import java.io.Serializable;
 import java.util.List;
 
 @Transactional
-public abstract class AbstractService<T extends Serializable, K extends Serializable> implements IOperations<T, K> {
+public abstract class AbstractService<Model extends Serializable, DTO extends Serializable> implements IOperations<Model, DTO> {
     @Override
     @Transactional(readOnly = true)
-    public T findOne(final Long id) {
-        return getDao().findById(id).orElse(null);
+    public DTO findOne(final Long id) {
+        return getDao().findById(id)
+                .map(x -> getMapper().toDtoBean(x))
+                .orElse(null);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<K> findAll() {
-
-        return Lists.newArrayList(getDao().findAll());
+    public List<DTO> findAll() {
+        return getMapper().toDtoBean(getDao().findAll());
     }
 
-    @Override
-    public Page<T> findPaginated(final int page, final int size) {
-        return getDao().findAll(PageRequest.of(page, size));
-    }
+//    @Override
+//    public Page<DTO> findPaginated(final int page, final int size) {
+//        return getMapper().toDtoBean(getDao().findAll(PageRequest.of(page, size)));
+//    }
 
     // write
 
     @Override
-    public T create(final T entity) {
-        return getDao().save(entity);
+    public DTO create(final Model entity) {
+        return getMapper().toDtoBean(getDao().save(entity));
     }
 
     @Override
-    public T update(final T entity) {
-        return getDao().save(entity);
+    public DTO update(final Model entity) {
+        return getMapper().toDtoBean(getDao().save(entity));
     }
 
     @Override
-    public void delete(final T entity) {
+    public void delete(final Model entity) {
         getDao().delete(entity);
     }
 
@@ -52,6 +51,8 @@ public abstract class AbstractService<T extends Serializable, K extends Serializ
         getDao().deleteById(entityId);
     }
 
-    protected abstract PagingAndSortingRepository<T, Long> getDao();
+    protected abstract PagingAndSortingRepository<Model, Long> getDao();
+
+    protected abstract BaseMapper<Model, DTO> getMapper();
 
 }
