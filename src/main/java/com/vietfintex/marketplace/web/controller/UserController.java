@@ -1,5 +1,6 @@
 package com.vietfintex.marketplace.web.controller;
 
+import com.vietfintex.marketplace.util.GlobalUtil;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.dto.UserDTO;
 import com.vietfintex.marketplace.web.service.UserService;
@@ -63,6 +64,35 @@ public class UserController {
             response.setObjectReturn(users);
         } catch (Exception e) {
             response.setErrorMessage("Co loi xay ra: " + e.getMessage());
+        }
+        return response;
+    }
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public  ResponseDTO login(@RequestBody final  UserDTO user){
+        ResponseDTO response = new ResponseDTO(false);
+        try{
+            if(GlobalUtil.isNullOrEmpty(user.getUserName())){
+                response.setErrorMessage("Vui lòng nhập tên đăng nhập, số điện thoại hoặc email để đăng nhập");
+                return response;
+            }else if(GlobalUtil.isNullOrEmpty(user.getPassword())){
+                response.setErrorMessage("Vui lòng nhập mật khẩu để đăng nhập");
+                return response;
+            }else {
+                UserDTO userDTO = userService.login(
+                        user.getUserName(),
+                        user.getPassword());
+                if(userDTO == null){
+                    response.setSuccess(false);
+                    response.setErrorMessage("Sai tên đăng nhập hoặc mật khẩu");
+                    return response;
+                }
+                response.setSuccess(true);
+                response.setObjectReturn(userDTO);
+                return response;
+            }
+        }catch (Exception e){
+            response.setErrorMessage("Co loi xay ra: "+ e.getMessage());
         }
         return response;
     }
