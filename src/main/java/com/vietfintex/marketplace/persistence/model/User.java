@@ -96,6 +96,10 @@ public class User implements Serializable {
     @Column(name = "sex")
     private String sex;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserProfile profile;
+
     public User() {
     }
 
@@ -111,6 +115,14 @@ public class User implements Serializable {
         this.purchaseTimestampFrom = purchaseTimestampFrom;
         this.purchaseTimestampTo = purchaseTimestampTo;
         this.passwordChangeTimestamp = passwordChangeTimestamp;
+    }
+
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
     }
 
     public String getSex() {

@@ -5,12 +5,9 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
-import com.vietfintex.marketplace.web.dto.UserDTO;
-
-import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * @author Dell
@@ -29,9 +26,9 @@ public class UserProfile implements Serializable {
     @Column(name = "profile_id")
     private Long profileId;
     @Column(name = "user_id")
-    private BigInteger userId;
+    private Long userId;
     @Column(name = "profile_type")
-    private Character profileType;
+    private String profileType;
     @Column(name = "b_firstname")
     private String bFirstname;
     @Column(name = "b_lastname")
@@ -76,9 +73,6 @@ public class UserProfile implements Serializable {
     private String sAddressType;
     @Column(name = "profile_name")
     private String profileName;
-    @OneToOne
-    @JoinColumn(name = "userId")
-    private User user;
 
     public UserProfile() {
     }
@@ -95,19 +89,19 @@ public class UserProfile implements Serializable {
         this.profileId = profileId;
     }
 
-    public BigInteger getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Character getProfileType() {
+    public String getProfileType() {
         return profileType;
     }
 
-    public void setProfileType(Character profileType) {
+    public void setProfileType(String profileType) {
         this.profileType = profileType;
     }
 
