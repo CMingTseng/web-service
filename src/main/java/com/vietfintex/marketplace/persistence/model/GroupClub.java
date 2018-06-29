@@ -17,17 +17,13 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author thiennv15
+ * @author Dell
  */
 @Entity
 @Table(name = "group_club")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "GroupClub.findAll", query = "SELECT g FROM GroupClub g")})
 public class GroupClub implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,11 +33,11 @@ public class GroupClub implements Serializable {
     @Column(name = "group_id")
     private Long groupId;
     @Column(name = "parent_group_id")
-    private Long parentGroupId;
+    private BigInteger parentGroupId;
     @Column(name = "group_name")
     private String groupName;
     @Column(name = "owner_id")
-    private Long ownerId;
+    private BigInteger ownerId;
     @Lob
     @Column(name = "description")
     private String description;
@@ -50,6 +46,11 @@ public class GroupClub implements Serializable {
     private Double annualFee;
     @Column(name = "status")
     private String status;
+    @Column(name = "privacy")
+    private String privacy;
+    @Lob
+    @Column(name = "term")
+    private String term;
 
     public GroupClub() {
     }
@@ -66,11 +67,11 @@ public class GroupClub implements Serializable {
         this.groupId = groupId;
     }
 
-    public Long getParentGroupId() {
+    public BigInteger getParentGroupId() {
         return parentGroupId;
     }
 
-    public void setParentGroupId(Long parentGroupId) {
+    public void setParentGroupId(BigInteger parentGroupId) {
         this.parentGroupId = parentGroupId;
     }
 
@@ -82,11 +83,11 @@ public class GroupClub implements Serializable {
         this.groupName = groupName;
     }
 
-    public Long getOwnerId() {
+    public BigInteger getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(BigInteger ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -114,6 +115,22 @@ public class GroupClub implements Serializable {
         this.status = status;
     }
 
+    public String getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(String privacy) {
+        this.privacy = privacy;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -136,7 +153,7 @@ public class GroupClub implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vietfintex.marketplace.persistence.model.GroupClub[ groupId=" + groupId + " ]";
+        return "com.vietfintex.marketplace.model.GroupClub[ groupId=" + groupId + " ]";
     }
     
 }

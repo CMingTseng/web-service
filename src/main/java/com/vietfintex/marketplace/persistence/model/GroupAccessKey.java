@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author thiennv15
+ * @author Dell
  */
 @Entity
 @Table(name = "group_access_key")
@@ -100,7 +100,7 @@ public class GroupAccessKey implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vietfintex.marketplace.persistence.model.GroupAccessKey[ accessKeyId=" + accessKeyId + " ]";
+        return "com.vietfintex.marketplace.model.GroupAccessKey[ accessKeyId=" + accessKeyId + " ]";
     }
     
 }

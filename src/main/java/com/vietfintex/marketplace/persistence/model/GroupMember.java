@@ -5,49 +5,59 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author thiennv15
+ * @author Dell
  */
 @Entity
 @Table(name = "group_member")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g")})
 public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected GroupMemberPK groupMemberPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "group_member_id")
+    private Long groupMemberId;
+    @Column(name = "group_id")
+    private Long groupId;
+    @Column(name = "user_id")
+    private Long userId;
     @Column(name = "status")
     private String status;
 
     public GroupMember() {
     }
 
-    public GroupMember(GroupMemberPK groupMemberPK) {
-        this.groupMemberPK = groupMemberPK;
+    public GroupMember(Long groupMemberId) {
+        this.groupMemberId = groupMemberId;
     }
 
-    public GroupMember(long groupId, long userId) {
-        this.groupMemberPK = new GroupMemberPK(groupId, userId);
+    public Long getGroupMemberId() {
+        return groupMemberId;
     }
 
-    public GroupMemberPK getGroupMemberPK() {
-        return groupMemberPK;
+    public void setGroupMemberId(Long groupMemberId) {
+        this.groupMemberId = groupMemberId;
     }
 
-    public void setGroupMemberPK(GroupMemberPK groupMemberPK) {
-        this.groupMemberPK = groupMemberPK;
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getStatus() {
@@ -61,7 +71,7 @@ public class GroupMember implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (groupMemberPK != null ? groupMemberPK.hashCode() : 0);
+        hash += (groupMemberId != null ? groupMemberId.hashCode() : 0);
         return hash;
     }
 
@@ -72,7 +82,7 @@ public class GroupMember implements Serializable {
             return false;
         }
         GroupMember other = (GroupMember) object;
-        if ((this.groupMemberPK == null && other.groupMemberPK != null) || (this.groupMemberPK != null && !this.groupMemberPK.equals(other.groupMemberPK))) {
+        if ((this.groupMemberId == null && other.groupMemberId != null) || (this.groupMemberId != null && !this.groupMemberId.equals(other.groupMemberId))) {
             return false;
         }
         return true;
@@ -80,7 +90,7 @@ public class GroupMember implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vietfintex.marketplace.persistence.model.GroupMember[ groupMemberPK=" + groupMemberPK + " ]";
+        return "com.vietfintex.marketplace.model.GroupMember[ groupMemberId=" + groupMemberId + " ]";
     }
     
 }
