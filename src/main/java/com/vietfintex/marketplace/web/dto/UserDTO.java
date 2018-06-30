@@ -47,7 +47,6 @@ public class UserDTO implements Serializable {
     private Date passwordChangeTimestamp;
     private String apiKey;
     private String janrainIdentifier;
-    @Column(name = "sex")
     private String sex;
 
     public Long getUserId() {

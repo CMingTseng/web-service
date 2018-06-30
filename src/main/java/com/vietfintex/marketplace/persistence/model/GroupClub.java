@@ -14,8 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -39,8 +37,8 @@ public class GroupClub implements Serializable {
     @Column(name = "owner_id")
     private BigInteger ownerId;
     @Lob
-    @Column(name = "description")
-    private String description;
+    @Column(name = "clubDescription")
+    private String clubDescription;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "annual_fee")
     private Double annualFee;
@@ -91,12 +89,12 @@ public class GroupClub implements Serializable {
         this.ownerId = ownerId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getClubDescription() {
+        return clubDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setClubDescription(String clubDescription) {
+        this.clubDescription = clubDescription;
     }
 
     public Double getAnnualFee() {
