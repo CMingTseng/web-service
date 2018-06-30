@@ -2,6 +2,7 @@ package com.vietfintex.marketplace.web.service.impl;
 
 import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.service.IOperations;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +24,6 @@ public abstract class AbstractService<Model extends Serializable, DTO extends Se
     public List<DTO> findAll() {
         return getMapper().toDtoBean(getDao().findAll());
     }
-
-//    @Override
-//    public Page<DTO> findPaginated(final int page, final int size) {
-//        return getMapper().toDtoBean(getDao().findAll(PageRequest.of(page, size)));
-//    }
-
-    // write
 
     @Override
     public DTO create(final Model entity) {

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -48,6 +49,16 @@ public class UserDTO implements Serializable {
     private String apiKey;
     private String janrainIdentifier;
     private String sex;
+
+    private List<MenuDTO> menuList;
+
+    public List<MenuDTO> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<MenuDTO> menuList) {
+        this.menuList = menuList;
+    }
 
     public Long getUserId() {
         return userId;

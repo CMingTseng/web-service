@@ -15,8 +15,6 @@ public interface IOperations<Model extends Serializable, DTO extends Serializabl
 
     List<DTO> findAll();
 
-//    Page<DTO> findPaginated(int page, int size);
-
     // write
 
     DTO create(final Model entity);

@@ -34,6 +34,8 @@ public class GroupClub implements Serializable {
     private BigInteger parentGroupId;
     @Column(name = "group_name")
     private String groupName;
+    @Column(name = "group_level")
+    private Long groupLevel;
     @Column(name = "owner_id")
     private BigInteger ownerId;
     @Lob
@@ -127,6 +129,14 @@ public class GroupClub implements Serializable {
 
     public void setTerm(String term) {
         this.term = term;
+    }
+
+    public Long getGroupLevel() {
+        return groupLevel;
+    }
+
+    public void setGroupLevel(Long groupLevel) {
+        this.groupLevel = groupLevel;
     }
 
     @Override

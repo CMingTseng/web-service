@@ -1,5 +1,6 @@
 package com.vietfintex.marketplace.web.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vietfintex.marketplace.util.GlobalUtil;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.dto.UserDTO;
@@ -7,14 +8,59 @@ import com.vietfintex.marketplace.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import static java.util.Objects.isNull;
-import static org.springframework.util.StringUtils.isEmpty;
+import static java.util.Objects.requireNonNull;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDTO search(@RequestBody Map<String, Object> param) {
+        ResponseDTO response = new ResponseDTO(false);
+        try {
+            param = Optional.ofNullable(param).orElseGet(HashMap::new);
+            ObjectMapper mapper = new ObjectMapper();
+            UserDTO searchDTO = Optional.ofNullable(param.get("searchDTO"))
+                    .map(x -> mapper.convertValue(x, UserDTO.class))
+                    .orElseGet(UserDTO::new);
+            int startPage = (int) param.get("startPage");
+            int pageSize = (int) param.get("pageSize");
+            List<UserDTO> users = userService.search(searchDTO, startPage, pageSize);
+            response.setSuccess(true);
+            response.setObjectReturn(users);
+        } catch (Exception e) {
+            response.setErrorMessage("Co loi xay ra: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDTO count(@RequestBody Map<String, Object> param) {
+        ResponseDTO response = new ResponseDTO(false);
+        try {
+            param = Optional.ofNullable(param).orElseGet(HashMap::new);
+            ObjectMapper mapper = new ObjectMapper();
+            UserDTO searchDTO = Optional.ofNullable(param.get("searchDTO"))
+                    .map(x -> mapper.convertValue(x, UserDTO.class))
+                    .orElseGet(UserDTO::new);
+            response.setSuccess(true);
+            response.setObjectReturn(userService.count(searchDTO));
+        } catch (Exception e) {
+            response.setErrorMessage("Co loi xay ra: " + e.getMessage());
+        }
+        return response;
+    }
+
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @ResponseBody
@@ -34,17 +80,16 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @PostMapping(value = "/login-admin")
     @ResponseBody
-    public ResponseDTO login(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
+    public ResponseDTO login(@RequestBody Map<String, String> param) {
         ResponseDTO response = new ResponseDTO(false);
         try {
-            if (isEmpty(username) || isEmpty(password)) {
-                response.setErrorMessage("least username or email or phone be not null and password be not null");
-                return response;
-            }
-
-            UserDTO users = userService.login(username, password);
+            requireNonNull(param, "param not found");
+            String username = GlobalUtil.requireNonEmpty(param.get("username"), "username must be not null");
+            String password = GlobalUtil.requireNonEmpty(param.get("password"), "password must be not null");
+            UserDTO users = userService.loginAdmin(username, password);
+            requireNonNull(users, "not found user");
             response.setSuccess(true);
             response.setObjectReturn(users);
         } catch (Exception e) {

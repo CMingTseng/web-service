@@ -7,6 +7,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface GroupClubService extends IOperations<GroupClub, GroupClubDTO> {
-    GroupClubDTO createOrInsertClub(GroupClubDTO groupClubDTO);
+    GroupClubDTO    createOrInsertClub(GroupClubDTO groupClubDTO);
     List<GroupClubDTO>  getListGroupClub(Long groupId, String privacy, String keyword, BigInteger ownerId);
 }
