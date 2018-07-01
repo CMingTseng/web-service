@@ -5,16 +5,8 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
 
 /**
  *
@@ -31,15 +23,15 @@ public class GroupClub implements Serializable {
     @Column(name = "group_id")
     private Long groupId;
     @Column(name = "group_root_id")
-    private BigInteger 	groupRootId;
+    private Long groupRootId;
     @Column(name = "parent_group_id")
-    private BigInteger parentGroupId;
+    private Long parentGroupId;
     @Column(name = "group_name")
     private String groupName;
     @Column(name = "group_level")
     private Long groupLevel;
     @Column(name = "owner_id")
-    private BigInteger ownerId;
+    private Long ownerId;
     @Lob
     @Column(name = "clubDescription")
     private String clubDescription;
@@ -72,11 +64,11 @@ public class GroupClub implements Serializable {
         this.groupId = groupId;
     }
 
-    public BigInteger getParentGroupId() {
+    public Long getParentGroupId() {
         return parentGroupId;
     }
 
-    public void setParentGroupId(BigInteger parentGroupId) {
+    public void setParentGroupId(Long parentGroupId) {
         this.parentGroupId = parentGroupId;
     }
 
@@ -88,11 +80,11 @@ public class GroupClub implements Serializable {
         this.groupName = groupName;
     }
 
-    public BigInteger getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(BigInteger ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -152,11 +144,11 @@ public class GroupClub implements Serializable {
         this.accessKey = accessKey;
     }
 
-    public BigInteger getGroupRootId() {
+    public Long getGroupRootId() {
         return groupRootId;
     }
 
-    public void setGroupRootId(BigInteger groupRootId) {
+    public void setGroupRootId(Long groupRootId) {
         this.groupRootId = groupRootId;
     }
 

@@ -12,8 +12,10 @@ import com.vietfintex.marketplace.web.dto.GroupClubDTO;
 import com.vietfintex.marketplace.web.dto.GroupMemberDTO;
 import com.vietfintex.marketplace.web.service.GroupClubService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -31,10 +33,11 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
             GroupMemberDTO.class);
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public GroupClubDTO createOrInsertClub(Long userLoginId,GroupClubDTO groupClubDTO) {
-        boolean rootGroup = groupClubDTO.getGroupRootId() == null ? true : false;
+        boolean rootGroup = groupClubDTO.getGroupRootId() == null;
         if (rootGroup) {
-            groupClubDTO.setGroupRootId((long) 1);
+            groupClubDTO.setGroupRootId(1L);
             //Truong hop la root club. Set gia tri de co the insert
         }
         GroupClubDTO group = getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(groupClubDTO)));
