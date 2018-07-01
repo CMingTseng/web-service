@@ -19,7 +19,7 @@ public interface IOperations<Model extends Serializable, DTO extends Serializabl
 
     DTO create(final Model entity);
 
-    DTO update(final Model entity);
+    DTO update(final DTO entity);
 
     void delete(final Model entity);
 

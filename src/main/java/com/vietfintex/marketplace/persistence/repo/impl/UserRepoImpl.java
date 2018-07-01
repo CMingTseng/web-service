@@ -87,6 +87,8 @@ public class UserRepoImpl implements UserCustomRepo {
         }
         Query query = em.createNativeQuery(sql, User.class);
         param.forEach(query::setParameter);
+        query.setFirstResult(startPage);
+        query.setMaxResults(pageSize);
         return query.getResultList();
     }
 
@@ -117,7 +119,7 @@ public class UserRepoImpl implements UserCustomRepo {
             sql += " AND u.lastname like CONCAT('%',:lastname,'%')";
             param.put("lastname", searchDTO.getLastname());
         }
-        Query query = em.createNativeQuery(sql, UserDTO.class);
+        Query query = em.createNativeQuery(sql);
         param.forEach(query::setParameter);
         return convertToLong(query.getSingleResult());
     }

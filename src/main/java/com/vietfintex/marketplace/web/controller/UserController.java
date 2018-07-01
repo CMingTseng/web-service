@@ -141,5 +141,20 @@ public class UserController {
         }
         return response;
     }
+    @PostMapping(value = "/")
+    @ResponseBody
+    public  ResponseDTO update(@RequestBody UserDTO user){
+        ResponseDTO response = new ResponseDTO(false);
+        try{
+            user = requireNonNull(user, "Not found user param");
+            UserDTO userDTO = userService.update(user);
+            requireNonNull(userDTO, "Error save info user");
+            response.setSuccess(true);
+            response.setObjectReturn(userDTO);
+        }catch (Exception e){
+            response.setErrorMessage("Co loi xay ra: "+ e.getMessage());
+        }
+        return response;
+    }
 
 }

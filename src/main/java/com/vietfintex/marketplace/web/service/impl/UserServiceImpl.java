@@ -32,11 +32,6 @@ public class UserServiceImpl extends AbstractService<User, UserDTO> implements U
     }
 
     @Override
-    public UserDTO findOne(Long id) {
-        return getMapper().toDtoBean(userRepo.findByUserId(id));
-    }
-
-    @Override
     public void validate(UserDTO user) throws LogicException {
         if (isNull(user)) {
             throw new LogicException("user must be not null");

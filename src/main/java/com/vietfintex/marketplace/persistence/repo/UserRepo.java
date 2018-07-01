@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface UserRepo extends JpaRepository<User, Long>, UserCustomRepo {
-    @Query("SELECT u FROM User u WHERE u.userId = :userId AND u.status = 'A'")
-    User findByUserId(@Param("userId") Long userId);
 
     @Query("SELECT u FROM User u WHERE u.userName = :username AND u.password = :password AND u.status = 'A'")
     User findByUsername(@Param("username") String username, @Param("password") String password);

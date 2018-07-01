@@ -31,8 +31,8 @@ public abstract class AbstractService<Model extends Serializable, DTO extends Se
     }
 
     @Override
-    public DTO update(final Model entity) {
-        return getMapper().toDtoBean(getDao().save(entity));
+    public DTO update(final DTO entity) {
+        return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(entity)));
     }
 
     @Override
