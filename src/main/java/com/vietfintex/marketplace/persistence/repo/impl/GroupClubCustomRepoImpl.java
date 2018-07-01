@@ -14,7 +14,7 @@ public class GroupClubCustomRepoImpl implements GroupClubCustomRepo {
     private EntityManager em;
 
     @Override
-    public List<GroupClub> getListGroupClub(Long groupId, String privacy, String keyword,BigInteger ownerId) {
+    public List<GroupClub> getListGroupClub(Long groupId, String privacy, String keyword,Long ownerId) {
         boolean first = false;
         String sql = "SELECT g.* FROM group_club g ";
         if(groupId != null){

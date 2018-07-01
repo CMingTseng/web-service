@@ -15,4 +15,8 @@ public interface UserRepo extends JpaRepository<User, Long>, UserCustomRepo {
 
     @Query("SELECT u FROM User u WHERE u.phone = :phone AND u.password = :password AND u.status = 'A'")
     User findByPhone(@Param("phone") String phone, @Param("password") String password);
+
+    @Query("SELECT u FROM User  u WHERE u.userName = :username OR u.email = :email OR u.phone = :phone")
+    User checkUsername(@Param("username") String username,@Param("email") String email,
+                       @Param("phone") String phone );
 }

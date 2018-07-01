@@ -104,9 +104,29 @@ public class UserController {
         ResponseDTO response = new ResponseDTO(false);
         try {
             userService.validate(user);
-            UserDTO users = userService.register(user);
-            response.setSuccess(true);
-            response.setObjectReturn(users);
+            UserDTO checkUser = userService.checkUser(user.getUserName() != null?
+                user.getUserName():"",user.getEmail() != null?
+                    user.getEmail():"",user.getPhone() != null?
+                    user.getPhone():"");
+            if(checkUser == null) {
+                UserDTO users = userService.register(user);
+                response.setSuccess(true);
+                response.setObjectReturn(users);
+            }else {
+                String msg ="";
+                if(user.getUserName() != null && user.getUserName().equals(checkUser.getUserName())){
+                    msg += "Tên đăng nhập đã được sử dụng";
+                }
+                if(user.getEmail() != null && user.getEmail().equals(checkUser.getEmail())){
+                    msg += "\nEmail đã được sử dụng";
+                }
+                if(user.getPhone() != null && user.getPhone().equals(checkUser.getPhone())){
+                    msg += "\nSố điện thoại đã được sử dụng";
+                }
+                response.setSuccess(false);
+                response.setErrorCode("201");
+                response.setErrorMessage(msg);
+            }
         } catch (Exception e) {
             response.setErrorMessage("Co loi xay ra: " + e.getMessage());
         }
