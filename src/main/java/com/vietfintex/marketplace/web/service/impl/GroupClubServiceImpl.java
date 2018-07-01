@@ -48,6 +48,7 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
         }
         //kiem tra & cap nhat vao bang group_member.
         GroupMember groupMember = groupMemberRepo.findGroupMemberByGroupUser(null,group.getGroupId(),userLoginId);
+
         if(groupMember == null){
             groupMember = new GroupMember();
             groupMember.setGroupId(group.getGroupId());
@@ -56,12 +57,23 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
             groupMemberRepo.save(groupMember);
         }
         group.setAccessKey(GlobalUtil.sha256(group.getGroupId() + ""));
+        group.setMemberCount(groupMemberRepo.getMemberCountByGroupId(group.getGroupId()));
         return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(group)));
     }
 
     @Override
-    public List<GroupClubDTO> getListGroupClub(Long groupId, String privacy, String keyword, Long ownerId) {
-        return getMapper().toDtoBean(repo.getListGroupClub(groupId, privacy, keyword, ownerId));
+    public List<GroupClubDTO> getListGroupClub(Integer page,Long groupId, String privacy, String keyword, Long ownerId) {
+        return getMapper().toDtoBean(repo.getListGroupClub(groupId, privacy, keyword, ownerId,page));
+    }
+
+    @Override
+    public List<GroupClubDTO> getListOtherGroupClub(Integer page,Long groupId, String privacy, String keyword, Long ownerId) {
+        return getMapper().toDtoBean(repo.getListOtherGroupClub(groupId, privacy, keyword, ownerId,page));
+    }
+
+    @Override
+    public void deleteGroupClub(GroupClubDTO groupClubDTO) {
+        repo.delete(getMapper().toPersistenceBean(groupClubDTO));
     }
 
     @Override

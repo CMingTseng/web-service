@@ -49,6 +49,9 @@ public class GroupClub implements Serializable {
     @Column(name = "access_key")
     private String accessKey;
 
+    @Column(name = "member_count")
+    private Long memberCount;
+
     public GroupClub() {
     }
 
@@ -150,6 +153,14 @@ public class GroupClub implements Serializable {
 
     public void setGroupRootId(Long groupRootId) {
         this.groupRootId = groupRootId;
+    }
+
+    public Long getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(Long memberCount) {
+        this.memberCount = memberCount;
     }
 
     @Override

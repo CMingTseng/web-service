@@ -86,7 +86,7 @@ public class UserRepoImpl implements UserCustomRepo {
             param.put("lastname", searchDTO.getLastname());
         }
         Query query = em.createNativeQuery(sql, User.class);
-        param.forEach(query::setParameter);
+            param.forEach(query::setParameter);
         query.setFirstResult(startPage);
         query.setMaxResults(pageSize);
         return query.getResultList();

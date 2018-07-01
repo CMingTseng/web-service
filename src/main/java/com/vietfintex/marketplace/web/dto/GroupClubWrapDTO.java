@@ -11,6 +11,7 @@ public class GroupClubWrapDTO implements Serializable {
 
     private Long userLoginId;
     private GroupClubDTO groupClubDTO;
+    private Integer page;
 
     public Long getUserLoginId() {
         return userLoginId;
@@ -26,5 +27,13 @@ public class GroupClubWrapDTO implements Serializable {
 
     public void setGroupClubDTO(GroupClubDTO groupClubDTO) {
         this.groupClubDTO = groupClubDTO;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 }

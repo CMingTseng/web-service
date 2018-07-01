@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface GroupClubService extends IOperations<GroupClub, GroupClubDTO> {
     GroupClubDTO    createOrInsertClub(Long userLoginId,GroupClubDTO groupClubDTO);
-    List<GroupClubDTO>  getListGroupClub(Long groupId, String privacy, String keyword, Long ownerId);
+    List<GroupClubDTO>  getListGroupClub(Integer page, Long groupId, String privacy, String keyword, Long ownerId);
+    List<GroupClubDTO>  getListOtherGroupClub(Integer page,Long groupId, String privacy, String keyword, Long ownerId);
+    void deleteGroupClub(GroupClubDTO groupClubDTO);
 }

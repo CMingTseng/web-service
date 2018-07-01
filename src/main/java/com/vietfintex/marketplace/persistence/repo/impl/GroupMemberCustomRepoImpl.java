@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.vietfintex.marketplace.util.NumberUtils.convertToLong;
+
 public class GroupMemberCustomRepoImpl implements GroupMemberCustomRepo {
     @PersistenceContext
     private EntityManager em;
@@ -40,5 +42,15 @@ public class GroupMemberCustomRepoImpl implements GroupMemberCustomRepo {
         }else{
             return  null;
         }
+    }
+
+    @Override
+    public Long getMemberCountByGroupId(long groupId) {
+        Map<String, Object> param = new HashMap<>();
+        String sql = "SELECT count(1) from group_member gm WHERE gm.group_id = :groupId";
+        param.put("groupId",groupId);
+        Query query = em.createNativeQuery(sql);
+        param.forEach(query::setParameter);
+        return convertToLong(query.getSingleResult());
     }
 }

@@ -21,7 +21,7 @@ public class GroupClubDTO  implements Serializable {
     private String term;
     private String accessKey;
     private Long groupRootId;
-
+    private Long memberCount;
     public Long getGroupId() {
         return groupId;
     }
@@ -116,5 +116,13 @@ public class GroupClubDTO  implements Serializable {
 
     public void setGroupRootId(Long groupRootId) {
         this.groupRootId = groupRootId;
+    }
+
+    public Long getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(Long memberCount) {
+        this.memberCount = memberCount;
     }
 }
