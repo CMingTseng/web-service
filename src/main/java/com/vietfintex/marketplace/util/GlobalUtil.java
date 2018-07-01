@@ -1,12 +1,9 @@
 package com.vietfintex.marketplace.util;
-
-import org.apache.commons.lang3.StringUtils;
-
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Collection;
-
+import java.util.Base64;
 import static java.util.Objects.isNull;
-import static org.springframework.util.StringUtils.isEmpty;
 
 public class GlobalUtil {
     static public boolean isNullOrEmpty(String input){
@@ -47,5 +44,15 @@ public class GlobalUtil {
         } catch(Exception ex){
             throw new RuntimeException(ex);
         }
+    }
+    public static String base64Encode(String token) {
+        byte[] encodedBytes = Base64.getEncoder().encode(token.getBytes());
+        return new String(encodedBytes, Charset.forName("UTF-8"));
+    }
+
+
+    public static String base64Decode(String token) {
+        byte[] decodedBytes = Base64.getDecoder().decode(token.getBytes());
+        return new String(decodedBytes, Charset.forName("UTF-8"));
     }
 }
