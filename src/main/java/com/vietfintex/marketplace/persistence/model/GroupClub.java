@@ -30,6 +30,8 @@ public class GroupClub implements Serializable {
     @Basic(optional = false)
     @Column(name = "group_id")
     private Long groupId;
+    @Column(name = "group_root_id")
+    private BigInteger 	groupRootId;
     @Column(name = "parent_group_id")
     private BigInteger parentGroupId;
     @Column(name = "group_name")
@@ -51,6 +53,9 @@ public class GroupClub implements Serializable {
     @Lob
     @Column(name = "term")
     private String term;
+
+    @Column(name = "access_key")
+    private String accessKey;
 
     public GroupClub() {
     }
@@ -137,6 +142,22 @@ public class GroupClub implements Serializable {
 
     public void setGroupLevel(Long groupLevel) {
         this.groupLevel = groupLevel;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public BigInteger getGroupRootId() {
+        return groupRootId;
+    }
+
+    public void setGroupRootId(BigInteger groupRootId) {
+        this.groupRootId = groupRootId;
     }
 
     @Override

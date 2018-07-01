@@ -10,14 +10,17 @@ public class GroupClubDTO  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long groupId;
-    private BigInteger parentGroupId;
+    private Long parentGroupId;
     private String groupName;
-    private BigInteger ownerId;
+    private String groupLevel;
+    private Long ownerId;
     private String clubDescription;
     private Double annualFee;
     private String status;
     private String privacy;
     private String term;
+    private String accessKey;
+    private Long groupRootId;
 
     public Long getGroupId() {
         return groupId;
@@ -27,11 +30,11 @@ public class GroupClubDTO  implements Serializable {
         this.groupId = groupId;
     }
 
-    public BigInteger getParentGroupId() {
+    public Long getParentGroupId() {
         return parentGroupId;
     }
 
-    public void setParentGroupId(BigInteger parentGroupId) {
+    public void setParentGroupId(Long parentGroupId) {
         this.parentGroupId = parentGroupId;
     }
 
@@ -43,11 +46,19 @@ public class GroupClubDTO  implements Serializable {
         this.groupName = groupName;
     }
 
-    public BigInteger getOwnerId() {
+    public String getGroupLevel() {
+        return groupLevel;
+    }
+
+    public void setGroupLevel(String groupLevel) {
+        this.groupLevel = groupLevel;
+    }
+
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(BigInteger ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -89,5 +100,21 @@ public class GroupClubDTO  implements Serializable {
 
     public void setTerm(String term) {
         this.term = term;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public Long getGroupRootId() {
+        return groupRootId;
+    }
+
+    public void setGroupRootId(Long groupRootId) {
+        this.groupRootId = groupRootId;
     }
 }

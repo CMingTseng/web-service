@@ -45,6 +45,7 @@ public class UserServiceImpl extends AbstractService<User, UserDTO> implements U
 
     @Override
     public UserDTO register(UserDTO userDTO) throws LogicException{
+
         return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(userDTO)));
     }
 
@@ -76,5 +77,10 @@ public class UserServiceImpl extends AbstractService<User, UserDTO> implements U
     @Override
     public long count(UserDTO searchDTO) {
         return userRepo.count(searchDTO);
+    }
+
+    @Override
+    public UserDTO checkUser(String username, String email, String phone) {
+        return getMapper().toDtoBean(userRepo.checkUsername(username,email,phone));
     }
 }
