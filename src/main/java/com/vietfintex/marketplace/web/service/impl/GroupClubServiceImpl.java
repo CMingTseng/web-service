@@ -72,6 +72,7 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteGroupClub(GroupClubDTO groupClubDTO) {
         repo.delete(getMapper().toPersistenceBean(groupClubDTO));
     }
