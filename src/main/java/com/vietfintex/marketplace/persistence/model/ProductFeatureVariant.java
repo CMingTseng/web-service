@@ -22,8 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_feature_variant")
-@NamedQueries({
-    @NamedQuery(name = "ProductFeatureVariant.findAll", query = "SELECT p FROM ProductFeatureVariant p")})
 public class ProductFeatureVariant implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +29,7 @@ public class ProductFeatureVariant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "variant_id")
-    private Integer variantId;
+    private Long variantId;
     @Column(name = "variant_name")
     private String variantName;
     @Basic(optional = false)
@@ -40,25 +38,25 @@ public class ProductFeatureVariant implements Serializable {
     @Column(name = "url")
     private String url;
     @Column(name = "position")
-    private Short position;
+    private Long position;
 
     public ProductFeatureVariant() {
     }
 
-    public ProductFeatureVariant(Integer variantId) {
+    public ProductFeatureVariant(Long variantId) {
         this.variantId = variantId;
     }
 
-    public ProductFeatureVariant(Integer variantId, int featureId) {
+    public ProductFeatureVariant(Long variantId, int featureId) {
         this.variantId = variantId;
         this.featureId = featureId;
     }
 
-    public Integer getVariantId() {
+    public Long getVariantId() {
         return variantId;
     }
 
-    public void setVariantId(Integer variantId) {
+    public void setVariantId(Long variantId) {
         this.variantId = variantId;
     }
 
@@ -86,11 +84,11 @@ public class ProductFeatureVariant implements Serializable {
         this.url = url;
     }
 
-    public Short getPosition() {
+    public Long getPosition() {
         return position;
     }
 
-    public void setPosition(Short position) {
+    public void setPosition(Long position) {
         this.position = position;
     }
 

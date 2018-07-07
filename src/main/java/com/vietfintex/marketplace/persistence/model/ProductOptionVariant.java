@@ -5,17 +5,8 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
@@ -23,8 +14,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_option_variant")
-@NamedQueries({
-    @NamedQuery(name = "ProductOptionVariant.findAll", query = "SELECT p FROM ProductOptionVariant p")})
 public class ProductOptionVariant implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,46 +21,46 @@ public class ProductOptionVariant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "variant_id")
-    private Integer variantId;
+    private Long variantId;
     @Column(name = "variant_name")
     private String variantName;
     @Basic(optional = false)
     @Column(name = "option_id")
-    private int optionId;
+    private Long optionId;
     @Basic(optional = false)
     @Column(name = "position")
     private short position;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "modifier")
-    private BigDecimal modifier;
+    private Double modifier;
     @Basic(optional = false)
     @Column(name = "modifier_type")
-    private Character modifierType;
+    private String modifierType;
     @Basic(optional = false)
     @Column(name = "weight_modifier")
-    private BigDecimal weightModifier;
+    private Double weightModifier;
     @Basic(optional = false)
     @Column(name = "weight_modifier_type")
-    private Character weightModifierType;
+    private String weightModifierType;
     @Basic(optional = false)
     @Column(name = "point_modifier")
-    private BigDecimal pointModifier;
+    private Double pointModifier;
     @Basic(optional = false)
     @Column(name = "point_modifier_type")
-    private Character pointModifierType;
+    private String pointModifierType;
     @Basic(optional = false)
     @Column(name = "status")
-    private Character status;
+    private String status;
 
     public ProductOptionVariant() {
     }
 
-    public ProductOptionVariant(Integer variantId) {
+    public ProductOptionVariant(Long variantId) {
         this.variantId = variantId;
     }
 
-    public ProductOptionVariant(Integer variantId, int optionId, short position, BigDecimal modifier, Character modifierType, BigDecimal weightModifier, Character weightModifierType, BigDecimal pointModifier, Character pointModifierType, Character status) {
+    public ProductOptionVariant(Long variantId, Long optionId, short position, Double modifier, String modifierType, Double weightModifier, String weightModifierType, Double pointModifier, String poLongModifierType, String status) {
         this.variantId = variantId;
         this.optionId = optionId;
         this.position = position;
@@ -84,11 +73,11 @@ public class ProductOptionVariant implements Serializable {
         this.status = status;
     }
 
-    public Integer getVariantId() {
+    public Long getVariantId() {
         return variantId;
     }
 
-    public void setVariantId(Integer variantId) {
+    public void setVariantId(Long variantId) {
         this.variantId = variantId;
     }
 
@@ -100,11 +89,11 @@ public class ProductOptionVariant implements Serializable {
         this.variantName = variantName;
     }
 
-    public int getOptionId() {
+    public Long getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(int optionId) {
+    public void setOptionId(Long optionId) {
         this.optionId = optionId;
     }
 
@@ -116,59 +105,59 @@ public class ProductOptionVariant implements Serializable {
         this.position = position;
     }
 
-    public BigDecimal getModifier() {
+    public Double getModifier() {
         return modifier;
     }
 
-    public void setModifier(BigDecimal modifier) {
+    public void setModifier(Double modifier) {
         this.modifier = modifier;
     }
 
-    public Character getModifierType() {
+    public String getModifierType() {
         return modifierType;
     }
 
-    public void setModifierType(Character modifierType) {
+    public void setModifierType(String modifierType) {
         this.modifierType = modifierType;
     }
 
-    public BigDecimal getWeightModifier() {
+    public Double getWeightModifier() {
         return weightModifier;
     }
 
-    public void setWeightModifier(BigDecimal weightModifier) {
+    public void setWeightModifier(Double weightModifier) {
         this.weightModifier = weightModifier;
     }
 
-    public Character getWeightModifierType() {
+    public String getWeightModifierType() {
         return weightModifierType;
     }
 
-    public void setWeightModifierType(Character weightModifierType) {
+    public void setWeightModifierType(String weightModifierType) {
         this.weightModifierType = weightModifierType;
     }
 
-    public BigDecimal getPointModifier() {
+    public Double getPointModifier() {
         return pointModifier;
     }
 
-    public void setPointModifier(BigDecimal pointModifier) {
+    public void setPointModifier(Double pointModifier) {
         this.pointModifier = pointModifier;
     }
 
-    public Character getPointModifierType() {
+    public String getPointModifierType() {
         return pointModifierType;
     }
 
-    public void setPointModifierType(Character pointModifierType) {
+    public void setPointModifierType(String pointModifierType) {
         this.pointModifierType = pointModifierType;
     }
 
-    public Character getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

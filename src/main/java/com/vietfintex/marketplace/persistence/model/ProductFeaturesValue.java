@@ -22,8 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_features_value")
-@NamedQueries({
-    @NamedQuery(name = "ProductFeaturesValue.findAll", query = "SELECT p FROM ProductFeaturesValue p")})
 public class ProductFeaturesValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,16 +29,16 @@ public class ProductFeaturesValue implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "value_id")
-    private Integer valueId;
+    private Long valueId;
     @Basic(optional = false)
     @Column(name = "feature_id")
-    private int featureId;
+    private Long featureId;
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
     @Basic(optional = false)
     @Column(name = "variant_id")
-    private int variantId;
+    private Long variantId;
     @Basic(optional = false)
     @Column(name = "value")
     private String value;
@@ -51,11 +49,11 @@ public class ProductFeaturesValue implements Serializable {
     public ProductFeaturesValue() {
     }
 
-    public ProductFeaturesValue(Integer valueId) {
+    public ProductFeaturesValue(Long valueId) {
         this.valueId = valueId;
     }
 
-    public ProductFeaturesValue(Integer valueId, int featureId, int productId, int variantId, String value) {
+    public ProductFeaturesValue(Long valueId, Long featureId, Long productId, Long variantId, String value) {
         this.valueId = valueId;
         this.featureId = featureId;
         this.productId = productId;
@@ -63,35 +61,35 @@ public class ProductFeaturesValue implements Serializable {
         this.value = value;
     }
 
-    public Integer getValueId() {
+    public Long getValueId() {
         return valueId;
     }
 
-    public void setValueId(Integer valueId) {
+    public void setValueId(Long valueId) {
         this.valueId = valueId;
     }
 
-    public int getFeatureId() {
+    public Long getFeatureId() {
         return featureId;
     }
 
-    public void setFeatureId(int featureId) {
+    public void setFeatureId(Long featureId) {
         this.featureId = featureId;
     }
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public int getVariantId() {
+    public Long getVariantId() {
         return variantId;
     }
 
-    public void setVariantId(int variantId) {
+    public void setVariantId(Long variantId) {
         this.variantId = variantId;
     }
 

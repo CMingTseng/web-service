@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_option")
-@NamedQueries({
-    @NamedQuery(name = "ProductOption.findAll", query = "SELECT p FROM ProductOption p")})
 public class ProductOption implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,13 +30,13 @@ public class ProductOption implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "option_id")
-    private Integer optionId;
+    private Long optionId;
     @Basic(optional = false)
     @Column(name = "store_id")
-    private int storeId;
+    private Long storeId;
     @Basic(optional = false)
     @Column(name = "option_type")
-    private Character optionType;
+    private String optionType;
     @Column(name = "option_name")
     private String optionName;
     @Lob
@@ -49,7 +47,7 @@ public class ProductOption implements Serializable {
     private String comment;
     @Basic(optional = false)
     @Column(name = "required")
-    private Character required;
+    private String required;
     @Basic(optional = false)
     @Column(name = "position")
     private short position;
@@ -58,16 +56,16 @@ public class ProductOption implements Serializable {
     private String value;
     @Basic(optional = false)
     @Column(name = "status")
-    private Character status;
+    private String status;
 
     public ProductOption() {
     }
 
-    public ProductOption(Integer optionId) {
+    public ProductOption(Long optionId) {
         this.optionId = optionId;
     }
 
-    public ProductOption(Integer optionId, int storeId, Character optionType, String comment, Character required, short position, String value, Character status) {
+    public ProductOption(Long optionId, Long storeId, String optionType, String comment, String required, short position, String value, String status) {
         this.optionId = optionId;
         this.storeId = storeId;
         this.optionType = optionType;
@@ -78,27 +76,27 @@ public class ProductOption implements Serializable {
         this.status = status;
     }
 
-    public Integer getOptionId() {
+    public Long getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(Integer optionId) {
+    public void setOptionId(Long optionId) {
         this.optionId = optionId;
     }
 
-    public int getStoreId() {
+    public Long getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Long storeId) {
         this.storeId = storeId;
     }
 
-    public Character getOptionType() {
+    public String getOptionType() {
         return optionType;
     }
 
-    public void setOptionType(Character optionType) {
+    public void setOptionType(String optionType) {
         this.optionType = optionType;
     }
 
@@ -126,11 +124,11 @@ public class ProductOption implements Serializable {
         this.comment = comment;
     }
 
-    public Character getRequired() {
+    public String getRequired() {
         return required;
     }
 
-    public void setRequired(Character required) {
+    public void setRequired(String required) {
         this.required = required;
     }
 
@@ -150,11 +148,11 @@ public class ProductOption implements Serializable {
         this.value = value;
     }
 
-    public Character getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

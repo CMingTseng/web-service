@@ -5,21 +5,9 @@
  */
 package com.vietfintex.marketplace.persistence.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,16 +15,26 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "product")
-@NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
 public class Product implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "product_id")
+    private Long productId;
     @Basic(optional = false)
     @Column(name = "category_id")
-    private int categoryId;
+    private Long categoryId;
+    @Basic(optional = false)
+    @Column(name = "product_code")
+    private String productCode;
     @Basic(optional = false)
     @Column(name = "product_name")
     private String productName;
+    @Basic(optional = false)
+    @Column(name = "product_type")
+    private String productType;
     @Lob
     @Column(name = "short_description")
     private String shortDescription;
@@ -48,13 +46,35 @@ public class Product implements Serializable {
     private String promoText;
     @Basic(optional = false)
     @Column(name = "store_id")
-    private int storeId;
+    private Long storeId;
+    @Basic(optional = false)
+    @Column(name = "approved")
+    private String approved;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @Column(name = "list_price")
+    private Double listPrice;
     @Basic(optional = false)
     @Column(name = "amount")
-    private int amount;
+    private Long amount;
+    @Basic(optional = false)
+    @Column(name = "weight")
+    private Double weight;
+    @Basic(optional = false)
+    @Column(name = "length")
+    private Long length;
+    @Basic(optional = false)
+    @Column(name = "width")
+    private Long width;
+    @Basic(optional = false)
+    @Column(name = "height")
+    private Long height;
+    @Basic(optional = false)
+    @Column(name = "shipping_freight")
+    private Double shippingFreight;
     @Basic(optional = false)
     @Column(name = "low_avail_limit")
-    private int lowAvailLimit;
+    private Long lowAvailLimit;
     @Basic(optional = false)
     @Column(name = "create_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -64,149 +84,74 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedTime;
     @Basic(optional = false)
+    @Column(name = "free_shipping")
+    private String freeShipping;
+    @Basic(optional = false)
+    @Column(name = "is_returnable")
+    private String isReturnable;
+    @Basic(optional = false)
+    @Column(name = "return_period")
+    private Long returnPeriod;
+    @Basic(optional = false)
     @Column(name = "avail_since")
     @Temporal(TemporalType.TIMESTAMP)
     private Date availSince;
     @Column(name = "parent_product_id")
-    private Integer parentProductId;
-    @Column(name = "variation_option")
-    private String variationOption;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "product_id")
-    private Integer productId;
-    @Basic(optional = false)
-    @Column(name = "product_code")
-    private String productCode;
-    @Basic(optional = false)
-    @Column(name = "product_type")
-    private Character productType;
-    @Basic(optional = false)
-    @Column(name = "status")
-    private Character status;
-    @Basic(optional = false)
-    @Column(name = "approved")
-    private Character approved;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @Column(name = "list_price")
-    private BigDecimal listPrice;
-    @Basic(optional = false)
-    @Column(name = "weight")
-    private BigDecimal weight;
-    @Basic(optional = false)
-    @Column(name = "length")
-    private int length;
-    @Basic(optional = false)
-    @Column(name = "width")
-    private int width;
-    @Basic(optional = false)
-    @Column(name = "height")
-    private int height;
-    @Basic(optional = false)
-    @Column(name = "shipping_freight")
-    private BigDecimal shippingFreight;
-    @Basic(optional = false)
-    @Column(name = "timestamp")
-    private int timestamp;
-    @Basic(optional = false)
-    @Column(name = "updated_timestamp")
-    private int updatedTimestamp;
-    @Basic(optional = false)
-    @Column(name = "free_shipping")
-    private Character freeShipping;
-    @Basic(optional = false)
-    @Column(name = "is_returnable")
-    private Character isReturnable;
-    @Basic(optional = false)
-    @Column(name = "return_period")
-    private int returnPeriod;
-    @Basic(optional = false)
-    @Column(name = "out_of_stock_actions")
-    private Character outOfStockActions;
-    @Basic(optional = false)
-    @Column(name = "min_qty")
-    private short minQty;
-    @Basic(optional = false)
-    @Column(name = "max_qty")
-    private short maxQty;
-    @Basic(optional = false)
-    @Column(name = "qty_step")
-    private short qtyStep;
-    @Basic(optional = false)
-    @Column(name = "list_qty_count")
-    private short listQtyCount;
-    @Basic(optional = false)
-    @Column(name = "tax_ids")
-    private String taxIds;
-    @Basic(optional = false)
-    @Column(name = "age_verification")
-    private Character ageVerification;
-    @Basic(optional = false)
-    @Column(name = "age_limit")
-    private short ageLimit;
+    private Long parentProductId;
     @Column(name = "variation_code")
     private String variationCode;
-    @Column(name = "variation_options")
-    private String variationOptions;
+    @Column(name = "variation_option")
+    private String variationOption;
     @Basic(optional = false)
-    @Column(name = "product_hash")
-    private String productHash;
-    @Column(name = "package_type")
-    private String packageType;
-    @Column(name = "short_descrition")
-    private Integer shortDescrition;
-    @Lob
-    @Column(name = "long_description")
-    private String longDescription;
+    @Column(name = "status")
+    private String status;
 
     public Product() {
     }
 
-    public Product(Integer productId) {
+    public Product(Long productId) {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String productCode, Character productType, Character status, long storeId, Character approved, BigDecimal listPrice, BigDecimal weight, int length, int width, int height, BigDecimal shippingFreight, int timestamp, int updatedTimestamp, Character freeShipping, Character isReturnable, int returnPeriod, int availSince, Character outOfStockActions, short minQty, short maxQty, short qtyStep, short listQtyCount, String taxIds, Character ageVerification, short ageLimit, int parentProductId, String productHash) {
+    public Product(Long productId, Long categoryId, String productCode, String productName, String productType, Long storeId, String approved, Double listPrice, Long amount, Double weight, Long length, Long width, Long height, Double shippingFreight, Long lowAvailLimit, Date createTime, Date updatedTime, String freeShipping, String isReturnable, Long returnPeriod, Date availSince, String status) {
         this.productId = productId;
+        this.categoryId = categoryId;
         this.productCode = productCode;
+        this.productName = productName;
         this.productType = productType;
-        this.status = status;
         this.storeId = storeId;
         this.approved = approved;
         this.listPrice = listPrice;
+        this.amount = amount;
         this.weight = weight;
         this.length = length;
         this.width = width;
         this.height = height;
         this.shippingFreight = shippingFreight;
-        this.timestamp = timestamp;
-        this.updatedTimestamp = updatedTimestamp;
+        this.lowAvailLimit = lowAvailLimit;
+        this.createTime = createTime;
+        this.updatedTime = updatedTime;
         this.freeShipping = freeShipping;
         this.isReturnable = isReturnable;
         this.returnPeriod = returnPeriod;
         this.availSince = availSince;
-        this.outOfStockActions = outOfStockActions;
-        this.minQty = minQty;
-        this.maxQty = maxQty;
-        this.qtyStep = qtyStep;
-        this.listQtyCount = listQtyCount;
-        this.taxIds = taxIds;
-        this.ageVerification = ageVerification;
-        this.ageLimit = ageLimit;
-        this.parentProductId = parentProductId;
-        this.productHash = productHash;
+        this.status = status;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getProductCode() {
@@ -217,293 +162,20 @@ public class Product implements Serializable {
         this.productCode = productCode;
     }
 
-    public Character getProductType() {
-        return productType;
-    }
-
-    public void setProductType(Character productType) {
-        this.productType = productType;
-    }
-
-    public Character getStatus() {
-        return status;
-    }
-
-    public void setStatus(Character status) {
-        this.status = status;
-    }
-
-    public long getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(long storeId) {
-        this.storeId = storeId;
-    }
-
-    public Character getApproved() {
-        return approved;
-    }
-
-    public void setApproved(Character approved) {
-        this.approved = approved;
-    }
-
-    public BigDecimal getListPrice() {
-        return listPrice;
-    }
-
-    public void setListPrice(BigDecimal listPrice) {
-        this.listPrice = listPrice;
-    }
-
-    public BigDecimal getWeight() {
-        return weight;
-    }
-
-    public void setWeight(BigDecimal weight) {
-        this.weight = weight;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public BigDecimal getShippingFreight() {
-        return shippingFreight;
-    }
-
-    public void setShippingFreight(BigDecimal shippingFreight) {
-        this.shippingFreight = shippingFreight;
-    }
-
-    public int getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public int getUpdatedTimestamp() {
-        return updatedTimestamp;
-    }
-
-    public void setUpdatedTimestamp(int updatedTimestamp) {
-        this.updatedTimestamp = updatedTimestamp;
-    }
-
-    public Character getFreeShipping() {
-        return freeShipping;
-    }
-
-    public void setFreeShipping(Character freeShipping) {
-        this.freeShipping = freeShipping;
-    }
-
-    public Character getIsReturnable() {
-        return isReturnable;
-    }
-
-    public void setIsReturnable(Character isReturnable) {
-        this.isReturnable = isReturnable;
-    }
-
-    public int getReturnPeriod() {
-        return returnPeriod;
-    }
-
-    public void setReturnPeriod(int returnPeriod) {
-        this.returnPeriod = returnPeriod;
-    }
-
-    public int getAvailSince() {
-        return availSince;
-    }
-
-    public void setAvailSince(int availSince) {
-        this.availSince = availSince;
-    }
-
-    public Character getOutOfStockActions() {
-        return outOfStockActions;
-    }
-
-    public void setOutOfStockActions(Character outOfStockActions) {
-        this.outOfStockActions = outOfStockActions;
-    }
-
-    public short getMinQty() {
-        return minQty;
-    }
-
-    public void setMinQty(short minQty) {
-        this.minQty = minQty;
-    }
-
-    public short getMaxQty() {
-        return maxQty;
-    }
-
-    public void setMaxQty(short maxQty) {
-        this.maxQty = maxQty;
-    }
-
-    public short getQtyStep() {
-        return qtyStep;
-    }
-
-    public void setQtyStep(short qtyStep) {
-        this.qtyStep = qtyStep;
-    }
-
-    public short getListQtyCount() {
-        return listQtyCount;
-    }
-
-    public void setListQtyCount(short listQtyCount) {
-        this.listQtyCount = listQtyCount;
-    }
-
-    public String getTaxIds() {
-        return taxIds;
-    }
-
-    public void setTaxIds(String taxIds) {
-        this.taxIds = taxIds;
-    }
-
-    public Character getAgeVerification() {
-        return ageVerification;
-    }
-
-    public void setAgeVerification(Character ageVerification) {
-        this.ageVerification = ageVerification;
-    }
-
-    public short getAgeLimit() {
-        return ageLimit;
-    }
-
-    public void setAgeLimit(short ageLimit) {
-        this.ageLimit = ageLimit;
-    }
-
-    public int getParentProductId() {
-        return parentProductId;
-    }
-
-    public void setParentProductId(int parentProductId) {
-        this.parentProductId = parentProductId;
-    }
-
-    public String getVariationCode() {
-        return variationCode;
-    }
-
-    public void setVariationCode(String variationCode) {
-        this.variationCode = variationCode;
-    }
-
-    public String getVariationOptions() {
-        return variationOptions;
-    }
-
-    public void setVariationOptions(String variationOptions) {
-        this.variationOptions = variationOptions;
-    }
-
-    public String getProductHash() {
-        return productHash;
-    }
-
-    public void setProductHash(String productHash) {
-        this.productHash = productHash;
-    }
-
-    public String getPackageType() {
-        return packageType;
-    }
-
-    public void setPackageType(String packageType) {
-        this.packageType = packageType;
-    }
-
-    public Integer getShortDescrition() {
-        return shortDescrition;
-    }
-
-    public void setShortDescrition(Integer shortDescrition) {
-        this.shortDescrition = shortDescrition;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (productId != null ? productId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product)) {
-            return false;
-        }
-        Product other = (Product) object;
-        if ((this.productId == null && other.productId != null) || (this.productId != null && !this.productId.equals(other.productId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.vietfintex.marketplace.model.Product[ productId=" + productId + " ]";
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public String getProductName() {
         return productName;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     public String getShortDescription() {
@@ -530,27 +202,83 @@ public class Product implements Serializable {
         this.promoText = promoText;
     }
 
-    public int getStoreId() {
+    public Long getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Long storeId) {
         this.storeId = storeId;
     }
 
-    public int getAmount() {
+    public String getApproved() {
+        return approved;
+    }
+
+    public void setApproved(String approved) {
+        this.approved = approved;
+    }
+
+    public Double getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(Double listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
-    public int getLowAvailLimit() {
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Long getLength() {
+        return length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
+
+    public Long getWidth() {
+        return width;
+    }
+
+    public void setWidth(Long width) {
+        this.width = width;
+    }
+
+    public Long getHeight() {
+        return height;
+    }
+
+    public void setHeight(Long height) {
+        this.height = height;
+    }
+
+    public Double getShippingFreight() {
+        return shippingFreight;
+    }
+
+    public void setShippingFreight(Double shippingFreight) {
+        this.shippingFreight = shippingFreight;
+    }
+
+    public Long getLowAvailLimit() {
         return lowAvailLimit;
     }
 
-    public void setLowAvailLimit(int lowAvailLimit) {
+    public void setLowAvailLimit(Long lowAvailLimit) {
         this.lowAvailLimit = lowAvailLimit;
     }
 
@@ -570,6 +298,30 @@ public class Product implements Serializable {
         this.updatedTime = updatedTime;
     }
 
+    public String getFreeShipping() {
+        return freeShipping;
+    }
+
+    public void setFreeShipping(String freeShipping) {
+        this.freeShipping = freeShipping;
+    }
+
+    public String getIsReturnable() {
+        return isReturnable;
+    }
+
+    public void setIsReturnable(String isReturnable) {
+        this.isReturnable = isReturnable;
+    }
+
+    public Long getReturnPeriod() {
+        return returnPeriod;
+    }
+
+    public void setReturnPeriod(Long returnPeriod) {
+        this.returnPeriod = returnPeriod;
+    }
+
     public Date getAvailSince() {
         return availSince;
     }
@@ -578,12 +330,20 @@ public class Product implements Serializable {
         this.availSince = availSince;
     }
 
-    public Integer getParentProductId() {
+    public Long getParentProductId() {
         return parentProductId;
     }
 
-    public void setParentProductId(Integer parentProductId) {
+    public void setParentProductId(Long parentProductId) {
         this.parentProductId = parentProductId;
+    }
+
+    public String getVariationCode() {
+        return variationCode;
+    }
+
+    public void setVariationCode(String variationCode) {
+        this.variationCode = variationCode;
     }
 
     public String getVariationOption() {
@@ -592,6 +352,39 @@ public class Product implements Serializable {
 
     public void setVariationOption(String variationOption) {
         this.variationOption = variationOption;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (productId != null ? productId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Product)) {
+            return false;
+        }
+        Product other = (Product) object;
+        if ((this.productId == null && other.productId != null) || (this.productId != null && !this.productId.equals(other.productId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.vietfintex.marketplace.model.Product[ productId=" + productId + " ]";
     }
     
 }

@@ -22,8 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "images_link")
-@NamedQueries({
-    @NamedQuery(name = "ImagesLink.findAll", query = "SELECT i FROM ImagesLink i")})
 public class ImagesLink implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,34 +29,34 @@ public class ImagesLink implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "pair_id")
-    private Integer pairId;
+    private Long pairId;
     @Basic(optional = false)
     @Column(name = "object_id")
-    private int objectId;
+    private Long objectId;
     @Basic(optional = false)
     @Column(name = "object_type")
     private String objectType;
     @Basic(optional = false)
     @Column(name = "image_id")
-    private int imageId;
+    private Long imageId;
     @Basic(optional = false)
     @Column(name = "detailed_id")
-    private int detailedId;
+    private Long detailedId;
     @Basic(optional = false)
     @Column(name = "type")
     private Character type;
     @Basic(optional = false)
     @Column(name = "position")
-    private int position;
+    private Long position;
 
     public ImagesLink() {
     }
 
-    public ImagesLink(Integer pairId) {
+    public ImagesLink(Long pairId) {
         this.pairId = pairId;
     }
 
-    public ImagesLink(Integer pairId, int objectId, String objectType, int imageId, int detailedId, Character type, int position) {
+    public ImagesLink(Long pairId, Long objectId, String objectType, Long imageId, Long detailedId, Character type, Long position) {
         this.pairId = pairId;
         this.objectId = objectId;
         this.objectType = objectType;
@@ -68,19 +66,19 @@ public class ImagesLink implements Serializable {
         this.position = position;
     }
 
-    public Integer getPairId() {
+    public Long getPairId() {
         return pairId;
     }
 
-    public void setPairId(Integer pairId) {
+    public void setPairId(Long pairId) {
         this.pairId = pairId;
     }
 
-    public int getObjectId() {
+    public Long getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(int objectId) {
+    public void setObjectId(Long objectId) {
         this.objectId = objectId;
     }
 
@@ -92,19 +90,19 @@ public class ImagesLink implements Serializable {
         this.objectType = objectType;
     }
 
-    public int getImageId() {
+    public Long getImageId() {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
 
-    public int getDetailedId() {
+    public Long getDetailedId() {
         return detailedId;
     }
 
-    public void setDetailedId(int detailedId) {
+    public void setDetailedId(Long detailedId) {
         this.detailedId = detailedId;
     }
 
@@ -116,11 +114,11 @@ public class ImagesLink implements Serializable {
         this.type = type;
     }
 
-    public int getPosition() {
+    public Long getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Long position) {
         this.position = position;
     }
 

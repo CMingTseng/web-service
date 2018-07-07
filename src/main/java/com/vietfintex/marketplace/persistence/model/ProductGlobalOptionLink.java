@@ -31,48 +31,48 @@ public class ProductGlobalOptionLink implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "global_option_id")
-    private Integer globalOptionId;
+    private Long globalOptionId;
     @Basic(optional = false)
     @Column(name = "option_id")
-    private int optionId;
+    private Long optionId;
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
 
     public ProductGlobalOptionLink() {
     }
 
-    public ProductGlobalOptionLink(Integer globalOptionId) {
+    public ProductGlobalOptionLink(Long globalOptionId) {
         this.globalOptionId = globalOptionId;
     }
 
-    public ProductGlobalOptionLink(Integer globalOptionId, int optionId, int productId) {
+    public ProductGlobalOptionLink(Long globalOptionId, Long optionId, Long productId) {
         this.globalOptionId = globalOptionId;
         this.optionId = optionId;
         this.productId = productId;
     }
 
-    public Integer getGlobalOptionId() {
+    public Long getGlobalOptionId() {
         return globalOptionId;
     }
 
-    public void setGlobalOptionId(Integer globalOptionId) {
+    public void setGlobalOptionId(Long globalOptionId) {
         this.globalOptionId = globalOptionId;
     }
 
-    public int getOptionId() {
+    public Long getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(int optionId) {
+    public void setOptionId(Long optionId) {
         this.optionId = optionId;
     }
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

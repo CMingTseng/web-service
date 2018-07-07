@@ -31,36 +31,36 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "image_id")
-    private Integer imageId;
+    private Long imageId;
     @Basic(optional = false)
     @Column(name = "image_path")
     private String imagePath;
     @Basic(optional = false)
     @Column(name = "image_x")
-    private int imageX;
+    private Long imageX;
     @Basic(optional = false)
     @Column(name = "image_y")
-    private int imageY;
+    private Long imageY;
 
     public Image() {
     }
 
-    public Image(Integer imageId) {
+    public Image(Long imageId) {
         this.imageId = imageId;
     }
 
-    public Image(Integer imageId, String imagePath, int imageX, int imageY) {
+    public Image(Long imageId, String imagePath, Long imageX, Long imageY) {
         this.imageId = imageId;
         this.imagePath = imagePath;
         this.imageX = imageX;
         this.imageY = imageY;
     }
 
-    public Integer getImageId() {
+    public Long getImageId() {
         return imageId;
     }
 
-    public void setImageId(Integer imageId) {
+    public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
 
@@ -72,19 +72,19 @@ public class Image implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public int getImageX() {
+    public Long getImageX() {
         return imageX;
     }
 
-    public void setImageX(int imageX) {
+    public void setImageX(Long imageX) {
         this.imageX = imageX;
     }
 
-    public int getImageY() {
+    public Long getImageY() {
         return imageY;
     }
 
-    public void setImageY(int imageY) {
+    public void setImageY(Long imageY) {
         this.imageY = imageY;
     }
 

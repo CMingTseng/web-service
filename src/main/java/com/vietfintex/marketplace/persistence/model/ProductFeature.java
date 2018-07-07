@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_feature")
-@NamedQueries({
-    @NamedQuery(name = "ProductFeature.findAll", query = "SELECT p FROM ProductFeature p")})
 public class ProductFeature implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +30,7 @@ public class ProductFeature implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "feature_id")
-    private Integer featureId;
+    private Long featureId;
     @Column(name = "feature_code")
     private String featureCode;
     @Column(name = "description")
@@ -42,7 +40,7 @@ public class ProductFeature implements Serializable {
     private String fullDescription;
     @Basic(optional = false)
     @Column(name = "feature_type")
-    private Character featureType;
+    private String featureType;
     @Lob
     @Column(name = "categories_path")
     private String categoriesPath;
@@ -51,31 +49,31 @@ public class ProductFeature implements Serializable {
     private int parentId;
     @Basic(optional = false)
     @Column(name = "display_on_product")
-    private Character displayOnProduct;
+    private String displayOnProduct;
     @Basic(optional = false)
     @Column(name = "display_on_catalog")
-    private Character displayOnCatalog;
+    private String displayOnCatalog;
     @Basic(optional = false)
     @Column(name = "display_on_header")
-    private Character displayOnHeader;
+    private String displayOnHeader;
     @Basic(optional = false)
     @Column(name = "status")
-    private Character status;
+    private String status;
     @Basic(optional = false)
     @Column(name = "position")
     private short position;
     @Basic(optional = false)
     @Column(name = "comparison")
-    private Character comparison;
+    private String comparison;
 
     public ProductFeature() {
     }
 
-    public ProductFeature(Integer featureId) {
+    public ProductFeature(Long featureId) {
         this.featureId = featureId;
     }
 
-    public ProductFeature(Integer featureId, Character featureType, int parentId, Character displayOnProduct, Character displayOnCatalog, Character displayOnHeader, Character status, short position, Character comparison) {
+    public ProductFeature(Long featureId, String featureType, int parentId, String displayOnProduct, String displayOnCatalog, String displayOnHeader, String status, short position, String comparison) {
         this.featureId = featureId;
         this.featureType = featureType;
         this.parentId = parentId;
@@ -87,11 +85,11 @@ public class ProductFeature implements Serializable {
         this.comparison = comparison;
     }
 
-    public Integer getFeatureId() {
+    public Long getFeatureId() {
         return featureId;
     }
 
-    public void setFeatureId(Integer featureId) {
+    public void setFeatureId(Long featureId) {
         this.featureId = featureId;
     }
 
@@ -119,11 +117,11 @@ public class ProductFeature implements Serializable {
         this.fullDescription = fullDescription;
     }
 
-    public Character getFeatureType() {
+    public String getFeatureType() {
         return featureType;
     }
 
-    public void setFeatureType(Character featureType) {
+    public void setFeatureType(String featureType) {
         this.featureType = featureType;
     }
 
@@ -143,35 +141,35 @@ public class ProductFeature implements Serializable {
         this.parentId = parentId;
     }
 
-    public Character getDisplayOnProduct() {
+    public String getDisplayOnProduct() {
         return displayOnProduct;
     }
 
-    public void setDisplayOnProduct(Character displayOnProduct) {
+    public void setDisplayOnProduct(String displayOnProduct) {
         this.displayOnProduct = displayOnProduct;
     }
 
-    public Character getDisplayOnCatalog() {
+    public String getDisplayOnCatalog() {
         return displayOnCatalog;
     }
 
-    public void setDisplayOnCatalog(Character displayOnCatalog) {
+    public void setDisplayOnCatalog(String displayOnCatalog) {
         this.displayOnCatalog = displayOnCatalog;
     }
 
-    public Character getDisplayOnHeader() {
+    public String getDisplayOnHeader() {
         return displayOnHeader;
     }
 
-    public void setDisplayOnHeader(Character displayOnHeader) {
+    public void setDisplayOnHeader(String displayOnHeader) {
         this.displayOnHeader = displayOnHeader;
     }
 
-    public Character getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -183,11 +181,11 @@ public class ProductFeature implements Serializable {
         this.position = position;
     }
 
-    public Character getComparison() {
+    public String getComparison() {
         return comparison;
     }
 
-    public void setComparison(Character comparison) {
+    public void setComparison(String comparison) {
         this.comparison = comparison;
     }
 
