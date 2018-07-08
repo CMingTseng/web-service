@@ -3,43 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vietfintex.marketplace.persistence.model;
+package com.vietfintex.marketplace.web.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- *
- * @author Dell
- */
-@Entity
-@Table(name = "image")
-public class Image implements Serializable {
+public class ImageDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "image_id")
     private Long imageId;
-    @Basic(optional = false)
-    @Column(name = "image_path")
     private String imagePath;
-    @Basic(optional = false)
-    @Column(name = "image_x")
     private Long imageX;
-    @Basic(optional = false)
-    @Column(name = "image_y")
     private Long imageY;
+    private String filename;
+    private String data;
 
-    public Image() {
+    public ImageDTO() {
     }
 
-    public Image(Long imageId) {
+    public ImageDTO(Long imageId) {
         this.imageId = imageId;
     }
 
-    public Image(Long imageId, String imagePath, Long imageX, Long imageY) {
+    public ImageDTO(Long imageId, String imagePath, Long imageX, Long imageY) {
         this.imageId = imageId;
         this.imagePath = imagePath;
         this.imageX = imageX;
@@ -78,6 +63,22 @@ public class Image implements Serializable {
         this.imageY = imageY;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -88,19 +89,14 @@ public class Image implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Image)) {
+        if (!(object instanceof ImageDTO)) {
             return false;
         }
-        Image other = (Image) object;
+        ImageDTO other = (ImageDTO) object;
         if ((this.imageId == null && other.imageId != null) || (this.imageId != null && !this.imageId.equals(other.imageId))) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.vietfintex.marketplace.model.Image[ imageId=" + imageId + " ]";
-    }
-    
 }
