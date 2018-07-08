@@ -4,10 +4,7 @@ import com.vietfintex.marketplace.persistence.model.Status;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +14,12 @@ public class StatusController {
     @Autowired
     private StatusService statusService;
 
-    @GetMapping
+    @GetMapping(value = "/{type}")
     @ResponseBody
-    public ResponseDTO search() {
+    public ResponseDTO search(@PathVariable("type") String type) {
         ResponseDTO response = new ResponseDTO(false);
         try {
-            List<Status> statuses = statusService.findAll();
+            List<Status> statuses = statusService.findByType(type);
             response.setSuccess(true);
             response.setObjectReturn(statuses);
         } catch (Exception e) {

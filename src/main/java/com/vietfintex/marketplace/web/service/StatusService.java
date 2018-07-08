@@ -8,4 +8,5 @@ import com.vietfintex.marketplace.web.dto.UserDTO;
 import java.util.List;
 
 public interface StatusService extends IOperations<Status, Status> {
+    List<Status> findByType(String type);
 }

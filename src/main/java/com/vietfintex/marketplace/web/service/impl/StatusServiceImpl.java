@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatusServiceImpl extends AbstractService<Status, Status> implements StatusService {
     @Autowired
@@ -21,5 +23,10 @@ public class StatusServiceImpl extends AbstractService<Status, Status> implement
     @Override
     protected BaseMapper<Status, Status> getMapper() {
         return new BaseMapper<>(Status.class, Status.class);
+    }
+
+    @Override
+    public List<Status> findByType(String type) {
+        return statusRepo.findByType(type);
     }
 }

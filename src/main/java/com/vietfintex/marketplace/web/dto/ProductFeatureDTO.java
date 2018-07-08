@@ -3,87 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vietfintex.marketplace.persistence.model;
+package com.vietfintex.marketplace.web.dto;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
-/**
- *
- * @author Dell
- */
-@Entity
-@Table(name = "product_feature")
-public class ProductFeature implements Serializable {
+public class ProductFeatureDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "feature_id")
     private Long featureId;
-    @Column(name = "feature_code")
     private String featureCode;
-    @Column(name = "description")
     private String description;
-    @Lob
-    @Column(name = "full_description")
     private String fullDescription;
-    @Basic(optional = false)
-    @Column(name = "feature_type")
     private String featureType;
-    @Lob
-    @Column(name = "categories_path")
     private String categoriesPath;
-    @Basic(optional = false)
-    @Column(name = "parent_id")
-    private Long parentId;
-    @Basic(optional = false)
-    @Column(name = "display_on_product")
+    private int parentId;
     private String displayOnProduct;
-    @Basic(optional = false)
-    @Column(name = "display_on_catalog")
     private String displayOnCatalog;
-    @Basic(optional = false)
-    @Column(name = "display_on_header")
     private String displayOnHeader;
-    @Basic(optional = false)
-    @Column(name = "status")
     private String status;
-    @Basic(optional = false)
-    @Column(name = "position")
     private short position;
-    @Basic(optional = false)
-    @Column(name = "comparison")
     private String comparison;
-
-    public ProductFeature() {
-    }
-
-    public ProductFeature(Long featureId) {
-        this.featureId = featureId;
-    }
-
-    public ProductFeature(Long featureId, String featureType, Long parentId, String displayOnProduct, String displayOnCatalog, String displayOnHeader, String status, short position, String comparison) {
-        this.featureId = featureId;
-        this.featureType = featureType;
-        this.parentId = parentId;
-        this.displayOnProduct = displayOnProduct;
-        this.displayOnCatalog = displayOnCatalog;
-        this.displayOnHeader = displayOnHeader;
-        this.status = status;
-        this.position = position;
-        this.comparison = comparison;
-    }
 
     public Long getFeatureId() {
         return featureId;
@@ -133,11 +73,11 @@ public class ProductFeature implements Serializable {
         this.categoriesPath = categoriesPath;
     }
 
-    public Long getParentId() {
+    public int getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(int parentId) {
         this.parentId = parentId;
     }
 
@@ -199,19 +139,14 @@ public class ProductFeature implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductFeature)) {
+        if (!(object instanceof ProductFeatureDTO)) {
             return false;
         }
-        ProductFeature other = (ProductFeature) object;
+        ProductFeatureDTO other = (ProductFeatureDTO) object;
         if ((this.featureId == null && other.featureId != null) || (this.featureId != null && !this.featureId.equals(other.featureId))) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.vietfintex.marketplace.model.ProductFeature[ featureId=" + featureId + " ]";
-    }
-    
 }
