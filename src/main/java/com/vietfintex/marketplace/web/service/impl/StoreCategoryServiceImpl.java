@@ -16,6 +16,7 @@ import com.vietfintex.marketplace.web.service.impl.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class StoreCategoryServiceImpl extends AbstractService<StoreCategory, Sto
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public StoreCategoryDTO modifyStoreCategory(StoreCategoryDTO storeCategoryDTO, String action) {
         if("D".equals(action)){ //Truong hop xoa
             if(storeCategoryDTO.getStoreCategoryId() != null){
@@ -50,5 +52,12 @@ public class StoreCategoryServiceImpl extends AbstractService<StoreCategory, Sto
             return getMapper().toDtoBean(repo.save(getMapper().toPersistenceBean(storeCategoryDTO)));
         }
         return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void storeCategoryChange(long storeId, List<Long> categoryIdList) {
+        repo.deleteAll();
+        repo.storeCategoryChange(storeId,categoryIdList);
     }
 }

@@ -5,4 +5,5 @@ import com.vietfintex.marketplace.persistence.model.StoreCategory;
 import java.util.List;
 
 public interface StoreCategoryCustomRepo {
+    void storeCategoryChange(long storeId, List<Long> categoryIdList);
 }

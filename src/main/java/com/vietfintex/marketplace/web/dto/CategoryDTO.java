@@ -16,6 +16,8 @@ public class CategoryDTO implements Serializable {
     private Long timestamp;
     private String isTrash;
     private String status;
+    private Long storeCategoryId;
+    private Long storeId;
 
     public Long getCategoryId() {
         return categoryId;
@@ -63,5 +65,21 @@ public class CategoryDTO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getStoreCategoryId() {
+        return storeCategoryId;
+    }
+
+    public void setStoreCategoryId(Long storeCategoryId) {
+        this.storeCategoryId = storeCategoryId;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
     }
 }

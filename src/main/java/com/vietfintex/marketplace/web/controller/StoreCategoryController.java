@@ -1,10 +1,8 @@
 package com.vietfintex.marketplace.web.controller;
 
 import com.vietfintex.marketplace.util.GlobalUtil;
-import com.vietfintex.marketplace.web.dto.CategoryDTO;
-import com.vietfintex.marketplace.web.dto.ResponseDTO;
-import com.vietfintex.marketplace.web.dto.StoreCategoryDTO;
-import com.vietfintex.marketplace.web.dto.StoreCategoryWrapDTO;
+import com.vietfintex.marketplace.util.NumberUtils;
+import com.vietfintex.marketplace.web.dto.*;
 import com.vietfintex.marketplace.web.service.CategoryService;
 import com.vietfintex.marketplace.web.service.StoreCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +58,28 @@ public class StoreCategoryController {
                         storeCategoryWrapDTO.getStoreCategoryDTO(), storeCategoryWrapDTO.getAction());
                 if (storeCategoryDTO != null) {
                     response.setSuccess(true);
-                    response.setObjectReturn(storeCategoryDTO);
+                    CategoryDTO categoryDTO = categoryService.findOne(storeCategoryDTO.getCategoryId());
+                    response.setObjectReturn(categoryDTO);
                     return response;
                 }
+            }
+        }catch (Exception e){
+            response.setErrorMessage("Co loi xay ra "+e.getMessage());
+            return response;
+        }
+        response.setErrorMessage("Bad request");
+        return response;
+    }
+
+    @RequestMapping(value = "storeCategoryChange" , method = RequestMethod.POST)
+    ResponseDTO storeCategoryChange(@RequestBody final StoreCategoryChangeDTO storeCategoryChangeDTO){
+        ResponseDTO response = new ResponseDTO(false);
+        try {
+            if(storeCategoryChangeDTO != null && storeCategoryChangeDTO.getStoreId() != null && storeCategoryChangeDTO.getStoreId() >=0
+            && storeCategoryChangeDTO.getCategoryIdList() != null && storeCategoryChangeDTO.getCategoryIdList().size() >=1){
+                storeCategoryService.storeCategoryChange(storeCategoryChangeDTO.getStoreId(),storeCategoryChangeDTO.getCategoryIdList());
+                response.setSuccess(true);
+                return response;
             }
         }catch (Exception e){
             response.setErrorMessage("Co loi xay ra "+e.getMessage());
