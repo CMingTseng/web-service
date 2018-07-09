@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Base64;
 import java.util.Date;
@@ -72,10 +74,12 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
             // Converting a Base64 String into Image byte array
             byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
             imageOutFile.write(imageByteArray);
+
+            BufferedImage buf = ImageIO.read(new ByteArrayInputStream(imageByteArray));
             Image image = new Image();
             image.setImagePath(IMAGE_URL_RESOURCE + relativePath);
-            image.setImageX(100L);
-            image.setImageY(100L);
+            image.setImageX((long) buf.getWidth());
+            image.setImageY((long) buf.getHeight());
             return repo.save(image);
         } catch (FileNotFoundException e) {
             logger.error("Image not found" + e.getMessage());
