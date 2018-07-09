@@ -1,5 +1,6 @@
 package com.vietfintex.marketplace.web.controller;
 
+import com.vietfintex.marketplace.persistence.model.Image;
 import com.vietfintex.marketplace.web.dto.ImageDTO;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.service.ImageService;
@@ -16,37 +17,19 @@ public class ImageController {
     @Autowired
     ImageService imageService;
 
-    @RequestMapping(value = "/image", method = RequestMethod.POST)
+    @RequestMapping(value = "/images", method = RequestMethod.POST)
     @ResponseBody
     public ResponseDTO upload(@RequestBody final ImageDTO imageDTO) {
         ResponseDTO response = new ResponseDTO(false);
         try {
             Objects.requireNonNull(imageDTO, "not found required imageDTO object");
 //            logger.info("/POST request with " + imageDTO.getData());
-            String filePath = imageService.decoder(imageDTO.getData(), imageDTO.getFilename());
+            Image imageUpload = imageService.upload(imageDTO.getData(), imageDTO.getFilename());
             response.setSuccess(true);
-            response.setObjectReturn(filePath);
+            response.setObjectReturn(imageUpload);
         } catch (Exception e) {
             response.setErrorMessage("Có lỗi xảy ra: " + e.getMessage());
         }
         return response;
     }
-
-    //    @RequestMapping(value = "/image/{pathImage:.+}", method = RequestMethod.GET)
-    @RequestMapping(value = "/image", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseDTO download(@RequestParam("pathImage") String filename) {
-        ResponseDTO response = new ResponseDTO(false);
-        try {
-            Objects.requireNonNull(filename, "not found required filename param");
-            logger.info("/GET request with " + filename);
-            String data = imageService.encoder(filename);
-            response.setSuccess(true);
-            response.setObjectReturn(data);
-        } catch (Exception e) {
-            response.setErrorMessage("Có lỗi xảy ra: " + e.getMessage());
-        }
-        return response;
-    }
-
 }

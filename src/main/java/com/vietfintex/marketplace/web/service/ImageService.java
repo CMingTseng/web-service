@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface ImageService extends IOperations<Image, ImageDTO> {
     String encoder(String imagePath) throws IOException;
 
-    String decoder(String base64Image, String pathFile) throws IOException;
+    Image upload(String base64Image, String filename) throws IOException;
 }

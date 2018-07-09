@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
 
     <display-name>Spring 4 REST Example</display-name>
@@ -20,6 +20,14 @@
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>images</servlet-name>
+        <servlet-class>com.vietfintex.marketplace.web.controller.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>images</servlet-name>
+        <url-pattern>/resources/images/*</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

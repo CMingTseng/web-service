@@ -5,6 +5,7 @@ import com.vietfintex.marketplace.persistence.repo.ImageRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.dto.ImageDTO;
 import com.vietfintex.marketplace.web.service.ImageService;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -13,11 +14,13 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.Base64;
+import java.util.Date;
 
 @Service
 public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implements ImageService {
     private static final Logger logger = Logger.getLogger(ImageService.class);
     private static final BaseMapper<Image, ImageDTO> mapper = new BaseMapper<>(Image.class, ImageDTO.class);
+    private static final String IMAGE_URL_RESOURCE = "/resources/images/";
     @Autowired
     ServletContext context;
     @Autowired
@@ -35,7 +38,7 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
 
     @Override
     public String encoder(String imagePath) throws IOException {
-        String rootPath = context.getRealPath("") + File.separator + "image";
+        String rootPath = context.getRealPath("") + File.separator + "images";
         File file = new File(rootPath + File.separator + imagePath);
         try (FileInputStream imageInFile = new FileInputStream(file)) {
             String base64Image = "";
@@ -53,14 +56,14 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
     }
 
     @Override
-    public String decoder(String base64Image, String filename) throws IOException {
-        String rootPath = context.getRealPath("");
-        String relativePath = File.separator + "image";
-        File dir = new File(rootPath + relativePath);
+    public Image upload(String base64Image, String filename) throws IOException {
+        String rootPath = context.getRealPath("") + File.separator + "images";
+        String relativePath = DateFormatUtils.format(new Date(), "yyyy/MM/dd") + "/" + filename;
+        File dir = new File(rootPath + File.separator + relativePath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File serverFile = new File(dir.getAbsolutePath() + File.separator + filename);
+        File serverFile = new File(dir.getAbsolutePath());
         if (!serverFile.exists()) {
             serverFile.createNewFile();
         }
@@ -69,7 +72,11 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
             // Converting a Base64 String into Image byte array
             byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
             imageOutFile.write(imageByteArray);
-            return relativePath;
+            Image image = new Image();
+            image.setImagePath(IMAGE_URL_RESOURCE + relativePath);
+            image.setImageX(100L);
+            image.setImageY(100L);
+            return repo.save(image);
         } catch (FileNotFoundException e) {
             logger.error("Image not found" + e.getMessage());
             throw e;
