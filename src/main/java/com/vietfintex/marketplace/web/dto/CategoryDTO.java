@@ -18,6 +18,9 @@ public class CategoryDTO implements Serializable {
     private String status;
     private Long storeCategoryId;
     private Long storeId;
+    private Long imageId;
+    private String imageUrl;
+    private Long parentCategoryId;
 
     public Long getCategoryId() {
         return categoryId;
@@ -81,5 +84,29 @@ public class CategoryDTO implements Serializable {
 
     public void setStoreId(Long storeId) {
         this.storeId = storeId;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Long getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 }
