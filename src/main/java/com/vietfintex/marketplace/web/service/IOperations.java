@@ -1,7 +1,5 @@
 package com.vietfintex.marketplace.web.service;
 
-import org.springframework.data.domain.Page;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public interface IOperations<Model extends Serializable, DTO extends Serializabl
 
     // write
 
-    DTO create(final Model entity);
+    DTO create(final DTO entity);
 
     DTO update(final DTO entity);
 
@@ -25,4 +23,11 @@ public interface IOperations<Model extends Serializable, DTO extends Serializabl
 
     void deleteById(final long entityId);
 
+    default List<DTO> search(DTO searchDTO, int startPage, int pageSize) throws Exception {
+        return null;
+    }
+
+    default Long count(DTO searchDTO) {
+        return 0L;
+    }
 }

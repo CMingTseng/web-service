@@ -2,14 +2,12 @@ package com.vietfintex.marketplace.web.service.impl;
 
 import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.service.IOperations;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Transactional
 public abstract class AbstractService<Model extends Serializable, DTO extends Serializable> implements IOperations<Model, DTO> {
     @Override
     @Transactional(readOnly = true)
@@ -26,21 +24,25 @@ public abstract class AbstractService<Model extends Serializable, DTO extends Se
     }
 
     @Override
-    public DTO create(final Model entity) {
-        return getMapper().toDtoBean(getDao().save(entity));
+    @Transactional(rollbackFor = Exception.class)
+    public DTO create(final DTO entity) {
+        return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(entity)));
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public DTO update(final DTO entity) {
         return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(entity)));
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(final Model entity) {
         getDao().delete(entity);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(final long entityId) {
         getDao().deleteById(entityId);
     }

@@ -5,8 +5,8 @@
  */
 package com.vietfintex.marketplace.web.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 public class ProductFeatureDTO implements Serializable {
 
@@ -24,6 +24,16 @@ public class ProductFeatureDTO implements Serializable {
     private String status;
     private short position;
     private String comparison;
+
+    private List<ProductFeatureVariantDTO> featureVariants;
+
+    public List<ProductFeatureVariantDTO> getFeatureVariants() {
+        return featureVariants;
+    }
+
+    public void setFeatureVariants(List<ProductFeatureVariantDTO> featureVariants) {
+        this.featureVariants = featureVariants;
+    }
 
     public Long getFeatureId() {
         return featureId;
