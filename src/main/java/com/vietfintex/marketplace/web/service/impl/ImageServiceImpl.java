@@ -60,12 +60,12 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
     @Override
     public Image upload(String base64Image, String filename) throws IOException {
         String rootPath = context.getRealPath("") + File.separator + "images";
-        String relativePath = DateFormatUtils.format(new Date(), "yyyy/MM/dd") + "/" + filename;
+        String relativePath = DateFormatUtils.format(new Date(), "yyyy/MM/dd");
         File dir = new File(rootPath + File.separator + relativePath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File serverFile = new File(dir.getAbsolutePath());
+        File serverFile = new File(dir.getAbsolutePath() + "/" + filename);
         if (!serverFile.exists()) {
             serverFile.createNewFile();
         }
@@ -77,7 +77,7 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
 
             BufferedImage buf = ImageIO.read(new ByteArrayInputStream(imageByteArray));
             Image image = new Image();
-            image.setImagePath(IMAGE_URL_RESOURCE + relativePath);
+            image.setImagePath(IMAGE_URL_RESOURCE + relativePath + "/" + filename);
             image.setImageX((long) buf.getWidth());
             image.setImageY((long) buf.getHeight());
             return repo.save(image);
