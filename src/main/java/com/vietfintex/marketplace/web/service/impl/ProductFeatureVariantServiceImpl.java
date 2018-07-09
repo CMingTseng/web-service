@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ProductFeatureVariantServiceImpl extends AbstractService<ProductFeatureVariant, ProductFeatureVariantDTO> implements ProductFeatureVariantService {
     private static final BaseMapper<ProductFeatureVariant, ProductFeatureVariantDTO> mapper = new BaseMapper<>(ProductFeatureVariant.class, ProductFeatureVariantDTO.class);
@@ -27,13 +25,4 @@ public class ProductFeatureVariantServiceImpl extends AbstractService<ProductFea
         return mapper;
     }
 
-    @Override
-    public List<ProductFeatureVariantDTO> search(ProductFeatureVariantDTO searchDTO, int startPage, int pageSize) throws Exception {
-        return getMapper().toDtoBean(repo.search(searchDTO, startPage, pageSize));
-    }
-
-    @Override
-    public Long count(ProductFeatureVariantDTO searchDTO) {
-        return repo.count(searchDTO);
-    }
 }
