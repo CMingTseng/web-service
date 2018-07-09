@@ -15,4 +15,15 @@ public class StoreCategoryCustomRepoImpl implements StoreCategoryCustomRepo {
     @PersistenceContext
     private EntityManager em;
 
+    @Override
+    public void storeCategoryChange(long storeId, List<Long> categoryIdList) {
+        String sql = "INSERT INTO store_category (store_id,category_id,status) values ";
+        for (Long categoryId :categoryIdList){
+            sql += "("+storeId+","+categoryId+","+"'A'),";
+        }
+        sql = sql.substring(0, sql.length() - 1);
+        Query query = em.createNativeQuery(sql);
+        int i = query.executeUpdate();
+        return;
+    }
 }

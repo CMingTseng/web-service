@@ -35,7 +35,7 @@ public class CategorySerivceImpl extends AbstractService<Category,CategoryDTO> i
 
     @Override
     public List<CategoryDTO> getListStoreCategory(Long storeCategoryId, Long storeId, Long categoryId, String keySearch, int page) {
-        return mapper.toDtoBean(repo.getListStoreCategory(storeCategoryId,storeId,categoryId,keySearch,page));
+        return repo.getListStoreCategory(storeCategoryId,storeId,categoryId,keySearch,page);
     }
 
     @Override

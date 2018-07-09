@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface StoreCategoryService extends IOperations<StoreCategory,StoreCategoryDTO> {
     StoreCategoryDTO modifyStoreCategory(StoreCategoryDTO storeCategoryWrap, String action);
+    void storeCategoryChange(long storeId, List<Long>categoryIdList);
 }
