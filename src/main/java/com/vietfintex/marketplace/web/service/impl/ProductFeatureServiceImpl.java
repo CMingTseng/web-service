@@ -6,7 +6,7 @@ import com.vietfintex.marketplace.persistence.repo.ProductFeatureRepo;
 import com.vietfintex.marketplace.persistence.repo.ProductFeatureVariantRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.dto.ImageDTO;
-import com.vietfintex.marketplace.web.dto.ImagesLinkDTO;
+import com.vietfintex.marketplace.web.dto.ImageLinkDTO;
 import com.vietfintex.marketplace.web.dto.ProductFeatureDTO;
 import com.vietfintex.marketplace.web.dto.ProductFeatureVariantDTO;
 import com.vietfintex.marketplace.web.service.ImageLinkService;
@@ -60,7 +60,7 @@ public class ProductFeatureServiceImpl extends AbstractService<ProductFeature, P
                     imageDTO.setFilename(variantDTO.getIconName());
                     imageDTO = imageService.save(imageDTO);
 
-                    ImagesLinkDTO imagesLinkDTO = new ImagesLinkDTO();
+                    ImageLinkDTO imagesLinkDTO = new ImageLinkDTO();
                     imagesLinkDTO.setObjectId(rs.getFeatureId());
                     imagesLinkDTO.setImageId(imageDTO.getImageId());
                     imagesLinkDTO.setObjectType("feature_variant");

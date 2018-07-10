@@ -46,7 +46,7 @@ public class ProductDTO implements Serializable {
     private String status;
     private List<ProductFeatureDTO> productFeatureList;
     private List<ProductOptionDTO> productOptionList;
-
+    private List<ImageLinkDTO> imageList;
     public ProductDTO() {
     }
 
@@ -77,6 +77,14 @@ public class ProductDTO implements Serializable {
         this.returnPeriod = returnPeriod;
         this.availSince = availSince;
         this.status = status;
+    }
+
+    public List<ImageLinkDTO> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<ImageLinkDTO> imageList) {
+        this.imageList = imageList;
     }
 
     public List<ProductFeatureDTO> getProductFeatureList() {

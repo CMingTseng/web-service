@@ -30,6 +30,11 @@ public abstract class AbstractService<Model extends Serializable, DTO extends Se
     }
 
     @Override
+    public List<DTO> saveAll(List<DTO> dtoList) throws Exception {
+        return getMapper().toDtoBean(getDao().saveAll(getMapper().toPersistenceBean(dtoList)));
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public DTO update(final DTO entity) {
         return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(entity)));
