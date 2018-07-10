@@ -1,9 +1,8 @@
 package com.vietfintex.marketplace.web.controller;
 
-import com.vietfintex.marketplace.web.dto.ProductFeatureDTO;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
-import com.vietfintex.marketplace.web.service.ProductFeatureService;
-import com.vietfintex.marketplace.web.service.ProductFeatureVariantService;
+import com.vietfintex.marketplace.web.dto.ShippingDTO;
+import com.vietfintex.marketplace.web.service.ShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,21 +10,19 @@ import java.util.Map;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/features")
-public class ProductFeatureController {
+@RequestMapping(value = "/shipping")
+public class ShippingController {
     @Autowired
-    ProductFeatureService productFeatureService;
-    @Autowired
-    ProductFeatureVariantService productFeatureVariantService;
+    ShippingService shippingService;
 
     @PostMapping(value = "/search")
     @ResponseBody
-    public ResponseDTO search(@RequestBody final Map<String, Object> param){
+    public ResponseDTO search(@RequestBody final Map<String, Object> param) {
         ResponseDTO response = new ResponseDTO(false);
         try {
 
-        }catch (Exception e){
-            response.setErrorMessage("Có lỗi xảy ra: "+e.getMessage());
+        } catch (Exception e) {
+            response.setErrorMessage("Có lỗi xảy ra: " + e.getMessage());
         }
         return response;
     }
@@ -33,7 +30,7 @@ public class ProductFeatureController {
 
     @RequestMapping(value = "/count", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDTO count(@RequestBody Map<String, Object> param){
+    public ResponseDTO count(@RequestBody Map<String, Object> param) {
         ResponseDTO response = new ResponseDTO(false);
         try {
 
@@ -45,14 +42,14 @@ public class ProductFeatureController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDTO createFeature(@RequestBody ProductFeatureDTO productFeatureDTO) {
+    public ResponseDTO save(@RequestBody ShippingDTO shippingDTO) {
         ResponseDTO response = new ResponseDTO(false);
         try {
-            Objects.requireNonNull(productFeatureDTO, "not found required param");
-            productFeatureService.save(productFeatureDTO);
+            Objects.requireNonNull(shippingDTO, "not found required shippingDTO param");
+            shippingService.save(shippingDTO);
             response.setSuccess(true);
-        }catch (Exception e){
-            response.setErrorMessage("Có lỗi xảy ra: "+e.getMessage());
+        } catch (Exception e) {
+            response.setErrorMessage("Có lỗi xảy ra: " + e.getMessage());
         }
         return response;
     }

@@ -25,7 +25,7 @@ public abstract class AbstractService<Model extends Serializable, DTO extends Se
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public DTO create(final DTO entity) {
+    public DTO save(final DTO entity) throws Exception {
         return getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(entity)));
     }
 

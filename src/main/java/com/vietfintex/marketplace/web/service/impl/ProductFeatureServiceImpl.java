@@ -48,24 +48,23 @@ public class ProductFeatureServiceImpl extends AbstractService<ProductFeature, P
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ProductFeatureDTO create(ProductFeatureDTO productFeatureDTO) {
+    public ProductFeatureDTO save(ProductFeatureDTO productFeatureDTO) throws Exception {
         ProductFeatureDTO rs = getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(productFeatureDTO)));
         List<ProductFeatureVariantDTO> featureVariantList = Optional.ofNullable(productFeatureDTO.getFeatureVariants()).orElseGet(ArrayList::new);
-        if (featureVariantList.isEmpty()) {
+        if (!featureVariantList.isEmpty()) {
             for (ProductFeatureVariantDTO variantDTO : productFeatureDTO.getFeatureVariants()) {
                 variantRepo.save(variantMapper.toPersistenceBean(variantDTO));
                 if (!isEmpty(variantDTO.getIconData())) {
                     ImageDTO imageDTO = new ImageDTO();
                     imageDTO.setData(variantDTO.getIconData());
                     imageDTO.setFilename(variantDTO.getIconName());
-                    imageDTO = imageService.create(imageDTO);
+                    imageDTO = imageService.save(imageDTO);
 
                     ImagesLinkDTO imagesLinkDTO = new ImagesLinkDTO();
                     imagesLinkDTO.setObjectId(rs.getFeatureId());
                     imagesLinkDTO.setImageId(imageDTO.getImageId());
                     imagesLinkDTO.setObjectType("feature_variant");
-
-                    imageLinkService.create(imagesLinkDTO);
+                    imageLinkService.save(imagesLinkDTO);
                 }
 
             }

@@ -5,9 +5,9 @@
  */
 package com.vietfintex.marketplace.web.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -44,6 +44,8 @@ public class ProductDTO implements Serializable {
     private String variationCode;
     private String variationOption;
     private String status;
+    private List<ProductFeatureDTO> productFeatureList;
+    private List<ProductOptionDTO> productOptionList;
 
     public ProductDTO() {
     }
@@ -75,6 +77,22 @@ public class ProductDTO implements Serializable {
         this.returnPeriod = returnPeriod;
         this.availSince = availSince;
         this.status = status;
+    }
+
+    public List<ProductFeatureDTO> getProductFeatureList() {
+        return productFeatureList;
+    }
+
+    public void setProductFeatureList(List<ProductFeatureDTO> productFeatureList) {
+        this.productFeatureList = productFeatureList;
+    }
+
+    public List<ProductOptionDTO> getProductOptionList() {
+        return productOptionList;
+    }
+
+    public void setProductOptionList(List<ProductOptionDTO> productOptionList) {
+        this.productOptionList = productOptionList;
     }
 
     public Long getProductId() {

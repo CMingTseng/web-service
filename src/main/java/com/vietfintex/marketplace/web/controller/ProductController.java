@@ -63,7 +63,7 @@ public class ProductController {
         ResponseDTO response = new ResponseDTO(false);
         try {
             Objects.requireNonNull(productDTO, "Not found product param");
-            productDTO = productService.create(productDTO);
+            productDTO = productService.save(productDTO);
             response.setSuccess(true);
             response.setObjectReturn(productDTO);
         } catch (Exception e) {

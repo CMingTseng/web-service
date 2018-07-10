@@ -15,7 +15,7 @@ public interface IOperations<Model extends Serializable, DTO extends Serializabl
 
     // write
 
-    DTO create(final DTO entity);
+    DTO save(final DTO entity) throws Exception;
 
     DTO update(final DTO entity);
 
