@@ -3,45 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vietfintex.marketplace.persistence.model;
+package com.vietfintex.marketplace.web.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- *
- * @author Dell
- */
-@Entity
-@Table(name = "product_feature_variant")
-public class ProductFeatureVariant implements Serializable {
+public class ProductFeatureVariantDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "variant_id")
     private Long variantId;
-    @Column(name = "variant_name")
     private String variantName;
-    @Basic(optional = false)
-    @Column(name = "feature_id")
+    private String description;
     private int featureId;
-    @Column(name = "url")
-    private String url;
-    @Column(name = "position")
     private Long position;
-    @Column(name = "variant_description")
-    private Long variantDescription;
+    private String url;
+    private String iconData;
+    private String iconName;
 
-    public ProductFeatureVariant() {
+    public ProductFeatureVariantDTO() {
     }
 
-    public ProductFeatureVariant(Long variantId) {
+    public ProductFeatureVariantDTO(Long variantId) {
         this.variantId = variantId;
     }
 
-    public ProductFeatureVariant(Long variantId, int featureId) {
+    public ProductFeatureVariantDTO(Long variantId, int featureId) {
         this.variantId = variantId;
         this.featureId = featureId;
     }
@@ -70,14 +55,6 @@ public class ProductFeatureVariant implements Serializable {
         this.featureId = featureId;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public Long getPosition() {
         return position;
     }
@@ -86,12 +63,36 @@ public class ProductFeatureVariant implements Serializable {
         this.position = position;
     }
 
-    public Long getVariantDescription() {
-        return variantDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVariantDescription(Long variantDescription) {
-        this.variantDescription = variantDescription;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIconData() {
+        return iconData;
+    }
+
+    public void setIconData(String iconData) {
+        this.iconData = iconData;
+    }
+
+    public String getIconName() {
+        return iconName;
+    }
+
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
     }
 
     @Override
@@ -104,19 +105,14 @@ public class ProductFeatureVariant implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductFeatureVariant)) {
+        if (!(object instanceof ProductFeatureVariantDTO)) {
             return false;
         }
-        ProductFeatureVariant other = (ProductFeatureVariant) object;
+        ProductFeatureVariantDTO other = (ProductFeatureVariantDTO) object;
         if ((this.variantId == null && other.variantId != null) || (this.variantId != null && !this.variantId.equals(other.variantId))) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.vietfintex.marketplace.model.ProductFeatureVariant[ variantId=" + variantId + " ]";
-    }
-    
 }

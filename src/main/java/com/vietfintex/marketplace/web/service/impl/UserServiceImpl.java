@@ -4,7 +4,6 @@ import com.vietfintex.marketplace.common.LogicException;
 import com.vietfintex.marketplace.persistence.model.User;
 import com.vietfintex.marketplace.persistence.repo.UserRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
-import com.vietfintex.marketplace.web.dto.MenuDTO;
 import com.vietfintex.marketplace.web.dto.UserDTO;
 import com.vietfintex.marketplace.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,7 @@ public class UserServiceImpl extends AbstractService<User, UserDTO> implements U
     }
 
     @Override
-    public long count(UserDTO searchDTO) {
+    public Long count(UserDTO searchDTO) {
         return userRepo.count(searchDTO);
     }
 

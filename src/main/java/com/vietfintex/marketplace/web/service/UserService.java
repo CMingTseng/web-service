@@ -17,7 +17,7 @@ public interface UserService extends IOperations<User, UserDTO> {
 
     List<UserDTO> search(UserDTO searchDTO, int page, int size);
 
-    long count(UserDTO searchDTO);
+    Long count(UserDTO searchDTO);
 
     UserDTO checkUser(String username, String email, String phone);
 }
