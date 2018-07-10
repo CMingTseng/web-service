@@ -40,9 +40,6 @@ public class ImagesLink implements Serializable {
     @Column(name = "image_id")
     private Long imageId;
     @Basic(optional = false)
-    @Column(name = "detailed_id")
-    private Long detailedId;
-    @Basic(optional = false)
     @Column(name = "type")
     private Character type;
     @Basic(optional = false)
@@ -52,19 +49,18 @@ public class ImagesLink implements Serializable {
     public ImagesLink() {
     }
 
-    public ImagesLink(Long pairId) {
-        this.pairId = pairId;
-    }
-
-    public ImagesLink(Long pairId, Long objectId, String objectType, Long imageId, Long detailedId, Character type, Long position) {
-        this.pairId = pairId;
-        this.objectId = objectId;
-        this.objectType = objectType;
-        this.imageId = imageId;
-        this.detailedId = detailedId;
-        this.type = type;
-        this.position = position;
-    }
+//    public ImagesLink(Long pairId) {
+//        this.pairId = pairId;
+//    }
+//
+//    public ImagesLink(Long pairId, Long objectId, String objectType, Long imageId, Character type, Long position) {
+//        this.pairId = pairId;
+//        this.objectId = objectId;
+//        this.objectType = objectType;
+//        this.imageId = imageId;
+//        this.type = type;
+//        this.position = position;
+//    }
 
     public Long getPairId() {
         return pairId;
@@ -96,14 +92,6 @@ public class ImagesLink implements Serializable {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
-    }
-
-    public Long getDetailedId() {
-        return detailedId;
-    }
-
-    public void setDetailedId(Long detailedId) {
-        this.detailedId = detailedId;
     }
 
     public Character getType() {

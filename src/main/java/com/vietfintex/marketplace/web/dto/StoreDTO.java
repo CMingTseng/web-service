@@ -3,6 +3,7 @@ package com.vietfintex.marketplace.web.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -20,6 +21,7 @@ public class StoreDTO  implements Serializable {
     private String 	phoneNumber;
     private String website;
     private String email;
+    private List<ImageLinkDTO> imageLinkDTOList;
 
     public Long getStoreId() {
         return storeId;
@@ -115,5 +117,13 @@ public class StoreDTO  implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<ImageLinkDTO> getImageLinkDTOList() {
+        return imageLinkDTOList;
+    }
+
+    public void setImageLinkDTOList(List<ImageLinkDTO> imageLinkDTOList) {
+        this.imageLinkDTOList = imageLinkDTOList;
     }
 }

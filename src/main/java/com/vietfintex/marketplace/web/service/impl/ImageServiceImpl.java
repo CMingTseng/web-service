@@ -1,8 +1,11 @@
 package com.vietfintex.marketplace.web.service.impl;
 
 import com.vietfintex.marketplace.persistence.model.Image;
+import com.vietfintex.marketplace.persistence.model.ImagesLink;
+import com.vietfintex.marketplace.persistence.repo.ImageLinkRepo;
 import com.vietfintex.marketplace.persistence.repo.ImageRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
+import com.vietfintex.marketplace.util.GlobalUtil;
 import com.vietfintex.marketplace.web.dto.ImageDTO;
 import com.vietfintex.marketplace.web.service.ImageService;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -10,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -28,6 +32,9 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
     @Autowired
     private ImageRepo repo;
 
+    @Autowired
+    private ImageLinkRepo imageLinkRepo;
+
     @Override
     protected PagingAndSortingRepository<Image, Long> getDao() {
         return repo;
@@ -43,7 +50,7 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
         String rootPath = context.getRealPath("") + File.separator + "images";
         File file = new File(rootPath + File.separator + imagePath);
         try (FileInputStream imageInFile = new FileInputStream(file)) {
-            String base64Image = "";
+            String base64Image;
             byte imageData[] = new byte[(int) file.length()];
             imageInFile.read(imageData);
             base64Image = Base64.getEncoder().encodeToString(imageData);
@@ -56,7 +63,7 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
             throw ioe;
         }
     }
-
+    @Transactional
     @Override
     public Image upload(String base64Image, String filename) throws IOException {
         String rootPath = context.getRealPath("") + File.separator + "images";
@@ -65,7 +72,8 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File serverFile = new File(dir.getAbsolutePath() + "/" + filename);
+        String timeStr = GlobalUtil.getCurrentTime();
+        File serverFile = new File(dir.getAbsolutePath() + "/"+timeStr+ "_" + filename);
         if (!serverFile.exists()) {
             serverFile.createNewFile();
         }
@@ -77,7 +85,7 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
 
             BufferedImage buf = ImageIO.read(new ByteArrayInputStream(imageByteArray));
             Image image = new Image();
-            image.setImagePath(IMAGE_URL_RESOURCE + relativePath + "/" + filename);
+            image.setImagePath(IMAGE_URL_RESOURCE + relativePath + "/"+timeStr+ "_" + filename);
             image.setImageX((long) buf.getWidth());
             image.setImageY((long) buf.getHeight());
             return repo.save(image);
@@ -88,5 +96,16 @@ public class ImageServiceImpl extends AbstractService<Image, ImageDTO> implement
             logger.error("Exception while reading the Image " + ioe.getMessage());
             throw ioe;
         }
+    }
+
+    @Override
+    public boolean deleteImage(String filePath) {
+        String rootPath = context.getRealPath("") + File.separator + "images";
+        File file = new File(rootPath + File.separator + filePath);
+        if (file.exists()){
+            file.delete();
+            return  true;
+        }
+        return false;
     }
 }

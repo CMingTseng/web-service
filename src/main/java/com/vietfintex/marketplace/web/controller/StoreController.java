@@ -1,5 +1,7 @@
 package com.vietfintex.marketplace.web.controller;
 
+import com.vietfintex.marketplace.persistence.repo.ImageRepo;
+import com.vietfintex.marketplace.web.dto.ImageLinkDTO;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.dto.StoreDTO;
 import com.vietfintex.marketplace.web.dto.StoreWrapDTO;
@@ -7,6 +9,7 @@ import com.vietfintex.marketplace.web.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,8 @@ import java.util.List;
 public class StoreController {
     @Autowired
     StoreService storeService;
+    @Autowired
+    ImageRepo repo;
 
     @RequestMapping(value = "/getStoreList", method = RequestMethod.POST)
     @ResponseBody
@@ -23,9 +28,15 @@ public class StoreController {
             if(storeWrapDTO != null){
                 StoreDTO storeDTO = storeWrapDTO.getStoreDTO();
                 if(storeDTO!= null){
-                    List<StoreDTO> returnObject = storeService.getStoreList(storeDTO.getStoreId(),
+                    List<StoreDTO> storeDTOList = storeService.getStoreList(storeDTO.getStoreId(),
                             storeDTO.getOwnerId(),storeDTO.getStoreName(),storeDTO.getAddress(),storeWrapDTO.getPage());
-                    if(returnObject != null){
+                    List<StoreDTO> returnObject = new ArrayList<>();
+                    if(storeDTOList != null){
+                        for (StoreDTO item : storeDTOList){
+                            List<ImageLinkDTO> imageLinkDTOList = repo.getImageLinkByObject(item.getStoreId(),"STO");
+                            item.setImageLinkDTOList(imageLinkDTOList);
+                            returnObject.add(item);
+                        }
                         response.setSuccess(true);
                         response.setObjectReturn(returnObject);
                         return response;

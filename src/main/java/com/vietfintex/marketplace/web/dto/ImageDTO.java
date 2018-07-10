@@ -16,6 +16,8 @@ public class ImageDTO implements Serializable {
     private Long imageY;
     private String filename;
     private String data;
+    private Long objectId;
+    private String objectType;
 
     public ImageDTO() {
     }
@@ -77,6 +79,22 @@ public class ImageDTO implements Serializable {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public Long getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
+    }
+
+    public String getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
     }
 
     @Override

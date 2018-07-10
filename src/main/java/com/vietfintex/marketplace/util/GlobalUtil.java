@@ -1,6 +1,8 @@
 package com.vietfintex.marketplace.util;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Base64;
 import static java.util.Objects.isNull;
@@ -57,5 +59,9 @@ public class GlobalUtil {
     }
     public static String convertToString(Object obj){
         return  obj == null ? null:String.valueOf(obj);
+    }
+    public static String getCurrentTime(){
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        return timeStamp;
     }
 }
