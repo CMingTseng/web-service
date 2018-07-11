@@ -10,7 +10,6 @@ public class GroupClubDTO  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long groupId;
-    private Long parentGroupId;
     private String groupName;
     private String groupLevel;
     private Long ownerId;
@@ -20,7 +19,6 @@ public class GroupClubDTO  implements Serializable {
     private String privacy;
     private String term;
     private String accessKey;
-    private Long groupRootId;
     private Long memberCount;
     public Long getGroupId() {
         return groupId;
@@ -28,14 +26,6 @@ public class GroupClubDTO  implements Serializable {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
-    }
-
-    public Long getParentGroupId() {
-        return parentGroupId;
-    }
-
-    public void setParentGroupId(Long parentGroupId) {
-        this.parentGroupId = parentGroupId;
     }
 
     public String getGroupName() {
@@ -108,14 +98,6 @@ public class GroupClubDTO  implements Serializable {
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
-    }
-
-    public Long getGroupRootId() {
-        return groupRootId;
-    }
-
-    public void setGroupRootId(Long groupRootId) {
-        this.groupRootId = groupRootId;
     }
 
     public Long getMemberCount() {

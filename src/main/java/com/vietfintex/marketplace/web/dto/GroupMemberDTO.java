@@ -9,6 +9,7 @@ public class GroupMemberDTO {
     private Long groupMemberId;
     private Long groupId;
     private Long userId;
+    private int level;
     private String status;
 
     public Long getGroupMemberId() {
@@ -41,5 +42,13 @@ public class GroupMemberDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

@@ -28,6 +28,8 @@ public class GroupMember implements Serializable {
     private Long userId;
     @Column(name = "status")
     private String status;
+    @Column(name = "level")
+    private int level;
 
     public GroupMember() {
     }
@@ -66,6 +68,14 @@ public class GroupMember implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     @Override

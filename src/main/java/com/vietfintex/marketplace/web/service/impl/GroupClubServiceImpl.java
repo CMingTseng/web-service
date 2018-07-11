@@ -35,17 +35,7 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
     @Override
     @Transactional(rollbackFor = Exception.class)
     public GroupClubDTO createOrInsertClub(Long userLoginId,GroupClubDTO groupClubDTO) {
-        boolean rootGroup = groupClubDTO.getGroupRootId() == null;
-        if (rootGroup) {
-            groupClubDTO.setGroupRootId(1L);
-            //Truong hop la root club. Set gia tri de co the insert
-        }
         GroupClubDTO group = getMapper().toDtoBean(getDao().save(getMapper().toPersistenceBean(groupClubDTO)));
-        if (rootGroup) {
-            group.setGroupRootId(group.getGroupId());
-            //Cap nhat lai gia tri group id trong truong hop them root moi.
-            //group root id se la group id
-        }
         //kiem tra & cap nhat vao bang group_member.
         GroupMember groupMember = groupMemberRepo.findGroupMemberByGroupUser(null,group.getGroupId(),userLoginId);
 
@@ -54,6 +44,7 @@ public class GroupClubServiceImpl extends AbstractService<GroupClub, GroupClubDT
             groupMember.setGroupId(group.getGroupId());
             groupMember.setUserId(userLoginId);
             groupMember.setStatus("A");
+            groupMember.setLevel(0);
             groupMemberRepo.save(groupMember);
         }
         group.setAccessKey(GlobalUtil.sha256(group.getGroupId() + ""));
