@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CommissionGroupRepo extends JpaRepository<CommissionGroup, Long> {
-    List<CommissionGroup> getByStoreCategoryIdOrderByLevel(Long storeCategoryId);
+    List<CommissionGroup> getByStoreCategoryId(Long storeCategoryId);
 }

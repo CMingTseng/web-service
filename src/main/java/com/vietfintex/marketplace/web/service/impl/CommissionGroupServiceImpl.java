@@ -28,7 +28,7 @@ public class CommissionGroupServiceImpl extends AbstractService<CommissionGroup,
 
     @Override
     public List<CommissionGroupDTO> getListByStoreCategoryId(Long storeCategoryId) {
-        return getMapper().toDtoBean(repo.getByStoreCategoryIdOrderByLevel(storeCategoryId));
+        return getMapper().toDtoBean(repo.getByStoreCategoryId(storeCategoryId));
     }
 
     @Override

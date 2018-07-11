@@ -10,6 +10,7 @@ public class CommissionCategoryWrap implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<CommissionGroupDTO> data;
+    private Long userLogin;
 
     public List<CommissionGroupDTO> getData() {
         return data;
@@ -17,5 +18,13 @@ public class CommissionCategoryWrap implements Serializable {
 
     public void setData(List<CommissionGroupDTO> data) {
         this.data = data;
+    }
+
+    public Long getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(Long userLogin) {
+        this.userLogin = userLogin;
     }
 }
