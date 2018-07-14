@@ -1,5 +1,6 @@
 package com.vietfintex.marketplace.web.service.impl;
 
+import com.querydsl.core.types.Predicate;
 import com.vietfintex.marketplace.persistence.model.Product;
 import com.vietfintex.marketplace.persistence.repo.ProductRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
@@ -12,6 +13,7 @@ import com.vietfintex.marketplace.web.service.ProductFeatureService;
 import com.vietfintex.marketplace.web.service.ProductOptionService;
 import com.vietfintex.marketplace.web.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,5 +75,10 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
         }
 
         return productDTO;
+    }
+
+    @Override
+    public Iterable<ProductDTO> search(Predicate predicate, Pageable pageable) {
+        return getMapper().toDtoBean(repo.findAll(predicate, pageable));
     }
 }

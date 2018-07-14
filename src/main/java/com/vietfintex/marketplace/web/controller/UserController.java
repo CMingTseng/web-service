@@ -6,6 +6,8 @@ import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.dto.UserDTO;
 import com.vietfintex.marketplace.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,9 +24,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseDTO search(@RequestBody Map<String, Object> param) {
+    public ResponseDTO search(@RequestParam Map<String, Object> param, @PageableDefault(sort = {"username", "email"}) Pageable pageable) {
         ResponseDTO response = new ResponseDTO(false);
         try {
             param = Optional.ofNullable(param).orElseGet(HashMap::new);
@@ -32,9 +34,9 @@ public class UserController {
             UserDTO searchDTO = Optional.ofNullable(param.get("searchDTO"))
                     .map(x -> mapper.convertValue(x, UserDTO.class))
                     .orElseGet(UserDTO::new);
-            int startPage = (int) param.get("startPage");
-            int pageSize = (int) param.get("pageSize");
-            List<UserDTO> users = userService.search(searchDTO, startPage, pageSize);
+//            int startPage = (int) param.get("startPage");
+//            int pageSize = (int) param.get("pageSize");
+            List<UserDTO> users = userService.search(searchDTO, pageable.getPageNumber(), pageable.getPageSize());
             response.setSuccess(true);
             response.setObjectReturn(users);
         } catch (Exception e) {

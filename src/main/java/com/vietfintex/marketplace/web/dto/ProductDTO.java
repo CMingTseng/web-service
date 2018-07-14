@@ -47,37 +47,6 @@ public class ProductDTO implements Serializable {
     private List<ProductFeatureDTO> productFeatureList;
     private List<ProductOptionDTO> productOptionList;
     private List<ImageLinkDTO> imageList;
-    public ProductDTO() {
-    }
-
-    public ProductDTO(Long productId) {
-        this.productId = productId;
-    }
-
-    public ProductDTO(Long productId, Long categoryId, String productCode, String productName, String productType, Long storeId, String approved, Double listPrice, Long amount, Double weight, Long length, Long width, Long height, Double shippingFreight, Long lowAvailLimit, Date createTime, Date updatedTime, String freeShipping, String isReturnable, Long returnPeriod, Date availSince, String status) {
-        this.productId = productId;
-        this.categoryId = categoryId;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.productType = productType;
-        this.storeId = storeId;
-        this.approved = approved;
-        this.listPrice = listPrice;
-        this.amount = amount;
-        this.weight = weight;
-        this.length = length;
-        this.width = width;
-        this.height = height;
-        this.shippingFreight = shippingFreight;
-        this.lowAvailLimit = lowAvailLimit;
-        this.createTime = createTime;
-        this.updatedTime = updatedTime;
-        this.freeShipping = freeShipping;
-        this.isReturnable = isReturnable;
-        this.returnPeriod = returnPeriod;
-        this.availSince = availSince;
-        this.status = status;
-    }
 
     public List<ImageLinkDTO> getImageList() {
         return imageList;
