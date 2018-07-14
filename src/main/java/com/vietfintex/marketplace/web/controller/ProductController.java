@@ -1,10 +1,13 @@
 package com.vietfintex.marketplace.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.querydsl.core.types.Predicate;
+import com.vietfintex.marketplace.persistence.model.Product;
 import com.vietfintex.marketplace.web.dto.ProductDTO;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,6 +17,13 @@ import java.util.*;
 public class ProductController {
     @Autowired
     ProductService productService;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/test")
+    @ResponseBody
+    public Iterable<ProductDTO> findAllByWebQuerydsl(@QuerydslPredicate(root = Product.class) Predicate predicate) {
+        System.out.println();
+        return productService.findAll();
+    }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
