@@ -22,7 +22,7 @@ public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long productId;
-    private Long storeCategoryId;
+    private Long categoryId;
     private String productCode;
     private String productName;
     private String productType;
@@ -94,12 +94,12 @@ public class ProductDTO implements Serializable {
         this.productId = productId;
     }
 
-    public Long getStoreCategoryId() {
-        return storeCategoryId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setStoreCategoryId(Long storeCategoryId) {
-        this.storeCategoryId = storeCategoryId;
+    public void setCategoryId(Long storeCategoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getProductCode() {
