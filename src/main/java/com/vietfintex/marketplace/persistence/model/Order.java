@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Dell
  */
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
