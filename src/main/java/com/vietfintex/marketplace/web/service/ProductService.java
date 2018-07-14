@@ -8,5 +8,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductService extends IOperations<Product, ProductDTO> {
 
-    Iterable<ProductDTO> search(Predicate predicate, Pageable pageable);
+    Iterable<ProductDTO> findAll(Predicate predicate, Pageable pageable);
 }

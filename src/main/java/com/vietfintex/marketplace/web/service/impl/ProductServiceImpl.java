@@ -78,7 +78,7 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
     }
 
     @Override
-    public Iterable<ProductDTO> search(Predicate predicate, Pageable pageable) {
+    public Iterable<ProductDTO> findAll(Predicate predicate, Pageable pageable) {
         return getMapper().toDtoBean(repo.findAll(predicate, pageable));
     }
 }

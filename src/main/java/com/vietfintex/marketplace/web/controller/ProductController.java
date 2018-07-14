@@ -7,6 +7,7 @@ import com.vietfintex.marketplace.web.dto.ProductDTO;
 import com.vietfintex.marketplace.web.dto.ResponseDTO;
 import com.vietfintex.marketplace.web.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,10 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
+    @GetMapping
     @ResponseBody
-    public Iterable<ProductDTO> findAllByWebQuerydsl(@QuerydslPredicate(root = Product.class) Predicate predicate) {
-        System.out.println();
-        return productService.findAll();
+    public Iterable<ProductDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
+        return productService.findAll(predicate, pageable);
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
