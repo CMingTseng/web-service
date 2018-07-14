@@ -16,7 +16,7 @@ public class QProduct extends EntityPathBase<Product> {
     public final NumberPath<Long> amount = this.createNumber("amount", Long.class);
     public final StringPath approved = this.createString("approved");
     public final DateTimePath<Date> availSince = this.createDateTime("availSince", Date.class);
-    public final NumberPath<Long> storeCategoryId = this.createNumber("storeCategoryId", Long.class);
+    public final NumberPath<Long> categoryId = this.createNumber("categoryId", Long.class);
     public final DateTimePath<Date> createTime = this.createDateTime("createTime", Date.class);
     public final StringPath freeShipping = this.createString("freeShipping");
     public final StringPath fullDescription = this.createString("fullDescription");

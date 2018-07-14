@@ -26,8 +26,8 @@ public class Product implements Serializable {
     @Column(name = "product_id")
     private Long productId;
     @Basic(optional = false)
-    @Column(name = "store_category_id")
-    private Long storeCategoryId;
+    @Column(name = "category_id")
+    private Long categoryId;
     @Basic(optional = false)
     @Column(name = "product_code")
     private String productCode;
@@ -115,9 +115,9 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Long productId, Long storeCategoryId, String productCode, String productName, String productType, Long storeId, String approved, Double listPrice, Long amount, Double weight, Long length, Long width, Long height, Double shippingFreight, Long lowAvailLimit, Date createTime, Date updatedTime, String freeShipping, String isReturnable, Long returnPeriod, Date availSince, String status) {
+    public Product(Long productId, Long categoryId, String productCode, String productName, String productType, Long storeId, String approved, Double listPrice, Long amount, Double weight, Long length, Long width, Long height, Double shippingFreight, Long lowAvailLimit, Date createTime, Date updatedTime, String freeShipping, String isReturnable, Long returnPeriod, Date availSince, String status) {
         this.productId = productId;
-        this.storeCategoryId = storeCategoryId;
+        this.categoryId = categoryId;
         this.productCode = productCode;
         this.productName = productName;
         this.productType = productType;
@@ -148,12 +148,12 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Long getStoreCategoryId() {
-        return storeCategoryId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setStoreCategoryId(Long storeCategoryId) {
-        this.storeCategoryId = storeCategoryId;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getProductCode() {
