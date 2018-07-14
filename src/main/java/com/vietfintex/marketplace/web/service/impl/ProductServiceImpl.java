@@ -1,23 +1,21 @@
 package com.vietfintex.marketplace.web.service.impl;
 
 import com.querydsl.core.types.Predicate;
+import com.vietfintex.marketplace.persistence.model.ImagesLink;
 import com.vietfintex.marketplace.persistence.model.Product;
+import com.vietfintex.marketplace.persistence.model.Store;
 import com.vietfintex.marketplace.persistence.repo.ProductRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
-import com.vietfintex.marketplace.web.dto.ImageLinkDTO;
-import com.vietfintex.marketplace.web.dto.ProductDTO;
-import com.vietfintex.marketplace.web.dto.ProductFeatureDTO;
-import com.vietfintex.marketplace.web.dto.ProductOptionDTO;
-import com.vietfintex.marketplace.web.service.ImageLinkService;
-import com.vietfintex.marketplace.web.service.ProductFeatureService;
-import com.vietfintex.marketplace.web.service.ProductOptionService;
-import com.vietfintex.marketplace.web.service.ProductService;
+import com.vietfintex.marketplace.web.dto.*;
+import com.vietfintex.marketplace.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,6 +32,8 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
     private ProductOptionService productOptionService;
     @Autowired
     private ProductFeatureService productFeatureService;
+    @Autowired
+    private StoreService storeService;
 
     @Override
     protected PagingAndSortingRepository<Product, Long> getDao() {
@@ -79,6 +79,17 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
 
     @Override
     public Iterable<ProductDTO> findAll(Predicate predicate, Pageable pageable) {
-        return getMapper().toDtoBean(repo.findAll(predicate, pageable));
+        Page<Product> productList = repo.findAll(predicate, pageable);
+        if (productList.hasContent()){
+            List<ProductDTO> rs = new ArrayList<>();
+            for (Product model: productList){
+                ProductDTO productDTO = getMapper().toDtoBean(model);
+                StoreDTO store = storeService.findOne(productDTO.getProductId());
+                productDTO.setStore(store);
+                rs.add(productDTO);
+            }
+            return rs;
+        }
+        return null;
     }
 }

@@ -10,6 +10,7 @@ public interface ProductRepo extends BaseRepository<Product, QProduct, Long>, Pr
     default void customize(QuerydslBindings bindings, QProduct root) {
         bindings.bind(String.class).first(
                 (StringPath path, String value) -> path.containsIgnoreCase(value));
-//        bindings.excluding(root.email);
+        bindings.including(root.productId, root.productCode, root.productName, root.amount
+                , root.approved, root.freeShipping, root.fullDescription, root.shortDescription);
     }
 }

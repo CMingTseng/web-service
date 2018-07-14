@@ -5,6 +5,9 @@
  */
 package com.vietfintex.marketplace.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.vietfintex.marketplace.persistence.model.Store;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,18 +16,19 @@ import java.util.List;
  *
  * @author Dell
  */
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long productId;
-    private Long categoryId;
+    private Long storeCategoryId;
     private String productCode;
     private String productName;
     private String productType;
     private String shortDescription;
     private String fullDescription;
     private String promoText;
-    private Long storeId;
     private String approved;
     private Double listPrice;
     private Long amount;
@@ -46,6 +50,16 @@ public class ProductDTO implements Serializable {
     private String status;
     private List<ProductFeatureDTO> productFeatureList;
     private List<ProductOptionDTO> productOptionList;
+    private StoreDTO store;
+
+    public StoreDTO getStore() {
+        return store;
+    }
+
+    public void setStore(StoreDTO store) {
+        this.store = store;
+    }
+
     private List<ImageLinkDTO> imageList;
 
     public List<ImageLinkDTO> getImageList() {
@@ -80,12 +94,12 @@ public class ProductDTO implements Serializable {
         this.productId = productId;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getStoreCategoryId() {
+        return storeCategoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setStoreCategoryId(Long storeCategoryId) {
+        this.storeCategoryId = storeCategoryId;
     }
 
     public String getProductCode() {
@@ -136,13 +150,6 @@ public class ProductDTO implements Serializable {
         this.promoText = promoText;
     }
 
-    public Long getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
-    }
 
     public String getApproved() {
         return approved;
