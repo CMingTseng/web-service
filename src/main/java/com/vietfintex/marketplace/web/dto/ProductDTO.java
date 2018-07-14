@@ -98,7 +98,7 @@ public class ProductDTO implements Serializable {
         return categoryId;
     }
 
-    public void setCategoryId(Long storeCategoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
