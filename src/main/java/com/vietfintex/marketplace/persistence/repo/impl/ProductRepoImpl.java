@@ -3,6 +3,7 @@ package com.vietfintex.marketplace.persistence.repo.impl;
 import com.vietfintex.marketplace.persistence.model.Product;
 import com.vietfintex.marketplace.persistence.repo.ProductCustomRepo;
 import com.vietfintex.marketplace.web.dto.ProductDTO;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +21,7 @@ public class ProductRepoImpl implements ProductCustomRepo {
     private EntityManager em;
 
     @Override
-    public List<Product> search(ProductDTO searchDTO, int startPage, int pageSize) {
+    public List<Product> search(ProductDTO searchDTO, Pageable pageable) {
         if (isNull(searchDTO)) {
             return null;
         }

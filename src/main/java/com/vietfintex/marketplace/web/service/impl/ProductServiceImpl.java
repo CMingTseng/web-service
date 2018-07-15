@@ -46,7 +46,7 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
     }
 
     @Override
-    public List<ProductDTO> search(ProductDTO searchDTO, int startPage, int pageSize) {
+    public List<ProductDTO> search(ProductDTO searchDTO, Pageable pageable) {
         return getMapper().toDtoBean(repo.search(searchDTO, startPage, pageSize));
     }
 

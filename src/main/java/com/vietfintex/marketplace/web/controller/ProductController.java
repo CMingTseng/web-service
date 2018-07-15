@@ -24,25 +24,20 @@ public class ProductController {
     public Iterable<ProductDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
         return productService.findAll(predicate, pageable);
     }
+    @GetMapping(value = "/test")
+    @ResponseBody
+    public Iterable<ProductDTO> test(Product product, Pageable pageable) {
+        System.out.println();
+        return null;
+    }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDTO search(@RequestBody Map<String, Object> param) {
+    public ResponseDTO search(ProductDTO searchDTO, Pageable pageable) {
         ResponseDTO response = new ResponseDTO(false);
         try {
             param = Optional.ofNullable(param).orElseGet(HashMap::new);
             ObjectMapper mapper = new ObjectMapper();
-            ProductDTO searchDTO = Optional.ofNullable(param.get("searchDTO"))
-                    .map(x -> mapper.convertValue(x, ProductDTO.class))
-                    .orElseGet(ProductDTO::new);
-            int startPage = Optional.ofNullable(param.get("startPage"))
-                    .map(String::valueOf)
-                    .map(Integer::valueOf)
-                    .orElse(0);
-            int pageSize = Optional.ofNullable(param.get("pageSize"))
-                    .map(String::valueOf)
-                    .map(Integer::valueOf)
-                    .orElse(10);
             List<ProductDTO> productDTOList = productService.search(searchDTO, startPage, pageSize);
             response.setSuccess(true);
             response.setObjectReturn(productDTOList);
