@@ -11,6 +11,6 @@ public interface ProductRepo extends BaseRepository<Product, QProduct, Long>, Pr
         bindings.bind(String.class).first(
                 (StringPath path, String value) -> path.containsIgnoreCase(value));
         bindings.including(root.productId, root.productCode, root.productName, root.amount
-                , root.approved, root.freeShipping, root.fullDescription, root.shortDescription);
+                , root.approved, root.freeShipping, root.fullDescription, root.shortDescription, root.categoryId);
     }
 }

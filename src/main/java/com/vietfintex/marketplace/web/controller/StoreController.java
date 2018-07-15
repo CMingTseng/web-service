@@ -1,12 +1,13 @@
 package com.vietfintex.marketplace.web.controller;
 
+import com.querydsl.core.types.Predicate;
+import com.vietfintex.marketplace.persistence.model.Product;
 import com.vietfintex.marketplace.persistence.repo.ImageRepo;
-import com.vietfintex.marketplace.web.dto.ImageLinkDTO;
-import com.vietfintex.marketplace.web.dto.ResponseDTO;
-import com.vietfintex.marketplace.web.dto.StoreDTO;
-import com.vietfintex.marketplace.web.dto.StoreWrapDTO;
+import com.vietfintex.marketplace.web.dto.*;
 import com.vietfintex.marketplace.web.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -90,5 +91,9 @@ public class StoreController {
         response.setErrorMessage("Không có quyền xoá club");
         return response;
     }
-
+    @GetMapping
+    @ResponseBody
+    public Iterable<StoreDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
+        return storeService.findAll(predicate, pageable);
+    }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface CommissionGroupService extends IOperations<CommissionGroup,CommissionGroupDTO> {
     List<CommissionGroupDTO> insertOrUpdate(List<CommissionGroupDTO> commissionGroupDTOList);
     List<CommissionGroupDTO> getListByStoreCategoryId(Long storeCategoryId);
+    CommissionGroupDTO searchCommissionGroup(Long groupId, Long productId, Long storeCategoryId, int level);
 }
