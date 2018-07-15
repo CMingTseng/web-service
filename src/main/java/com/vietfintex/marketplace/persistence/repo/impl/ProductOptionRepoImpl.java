@@ -3,6 +3,7 @@ package com.vietfintex.marketplace.persistence.repo.impl;
 import com.vietfintex.marketplace.persistence.model.ProductOption;
 import com.vietfintex.marketplace.persistence.repo.ProductOptionCustomRepo;
 import com.vietfintex.marketplace.web.dto.ProductOptionDTO;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +22,7 @@ public class ProductOptionRepoImpl implements ProductOptionCustomRepo {
     private EntityManager em;
 
     @Override
-    public List<ProductOptionDTO> search(ProductOptionDTO searchDTO, int startPage, int pageSize) {
+    public List<ProductOptionDTO> search(ProductOptionDTO searchDTO, Pageable pageable) {
         if (isNull(searchDTO)) {
             return null;
         }
@@ -45,8 +46,8 @@ public class ProductOptionRepoImpl implements ProductOptionCustomRepo {
         }
         Query query = em.createNativeQuery(sql, ProductOption.class);
         param.forEach(query::setParameter);
-        query.setFirstResult(startPage);
-        query.setMaxResults(pageSize);
+        query.setFirstResult(pageable.getPageNumber());
+        query.setMaxResults(pageable.getPageSize());
         return query.getResultList();
     }
 

@@ -3,6 +3,7 @@ package com.vietfintex.marketplace.persistence.repo.impl;
 import com.vietfintex.marketplace.persistence.model.ProductOption;
 import com.vietfintex.marketplace.persistence.repo.OrderCustomRepo;
 import com.vietfintex.marketplace.web.dto.OrderDTO;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +20,7 @@ public class OrderRepoImpl implements OrderCustomRepo {
     private EntityManager em;
 
     @Override
-    public List<OrderDTO> search(OrderDTO searchDTO, int startPage, int pageSize) {
+    public List<OrderDTO> search(OrderDTO searchDTO, Pageable pageable) {
         if (isNull(searchDTO)) {
             return null;
         }
@@ -43,8 +44,8 @@ public class OrderRepoImpl implements OrderCustomRepo {
 //        }
         Query query = em.createNativeQuery(sql, ProductOption.class);
         param.forEach(query::setParameter);
-        query.setFirstResult(startPage);
-        query.setMaxResults(pageSize);
+        query.setFirstResult(pageable.getPageNumber());
+        query.setMaxResults(pageable.getPageSize());
         return query.getResultList();
     }
 

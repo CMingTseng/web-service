@@ -4,6 +4,8 @@ import com.querydsl.core.types.Predicate;
 import com.vietfintex.marketplace.persistence.model.ImagesLink;
 import com.vietfintex.marketplace.persistence.model.Product;
 import com.vietfintex.marketplace.persistence.model.Store;
+import com.vietfintex.marketplace.persistence.repo.ImageLinkRepo;
+import com.vietfintex.marketplace.persistence.repo.ImageRepo;
 import com.vietfintex.marketplace.persistence.repo.ProductRepo;
 import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.dto.*;
@@ -27,6 +29,8 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
     @Autowired
     private ProductRepo repo;
     @Autowired
+    private ImageRepo imageRepo;
+    @Autowired
     private ImageLinkService imageLinkService;
     @Autowired
     private ProductOptionService productOptionService;
@@ -47,7 +51,17 @@ public class ProductServiceImpl extends AbstractService<Product, ProductDTO> imp
 
     @Override
     public List<ProductDTO> search(ProductDTO searchDTO, Pageable pageable) {
-        return getMapper().toDtoBean(repo.search(searchDTO, startPage, pageSize));
+        List<ProductDTO> result = getMapper().toDtoBean(repo.search(searchDTO, pageable));
+        if (nonNullOrEmpty(result)){
+            for (ProductDTO dto: result){
+                StoreDTO store = storeService.findOne(dto.getProductId());
+                dto.setStore(store);
+                List<ImageLinkDTO> imageLinkList = imageRepo.getImageLinkByObject(dto.getProductId(), "PRO");
+                dto.setImageList(imageLinkList);
+            }
+            return result;
+        }
+        return null;
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.vietfintex.marketplace.web.service.ImageLinkService;
 import com.vietfintex.marketplace.web.service.ImageService;
 import com.vietfintex.marketplace.web.service.ProductFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,8 +74,8 @@ public class ProductFeatureServiceImpl extends AbstractService<ProductFeature, P
     }
 
     @Override
-    public List<ProductFeatureDTO> search(ProductFeatureDTO searchDTO, int startPage, int pageSize) throws Exception {
-        return getMapper().toDtoBean(featureRepo.search(searchDTO, startPage, pageSize));
+    public List<ProductFeatureDTO> search(ProductFeatureDTO searchDTO, Pageable pageable) throws Exception {
+        return getMapper().toDtoBean(featureRepo.search(searchDTO, pageable));
     }
 
     @Override

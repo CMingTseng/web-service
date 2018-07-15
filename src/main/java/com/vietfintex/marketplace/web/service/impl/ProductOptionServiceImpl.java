@@ -11,6 +11,7 @@ import com.vietfintex.marketplace.web.service.ImageLinkService;
 import com.vietfintex.marketplace.web.service.ImageService;
 import com.vietfintex.marketplace.web.service.ProductOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,8 +56,8 @@ public class ProductOptionServiceImpl extends AbstractService<ProductOption, Pro
     }
 
     @Override
-    public List<ProductOptionDTO> search(ProductOptionDTO searchDTO, int startPage, int pageSize) throws Exception {
-        return optionRepo.search(searchDTO, startPage, pageSize);
+    public List<ProductOptionDTO> search(ProductOptionDTO searchDTO, Pageable pageable) throws Exception {
+        return optionRepo.search(searchDTO, pageable);
     }
 
     @Override

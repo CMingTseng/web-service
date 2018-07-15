@@ -23,6 +23,7 @@ public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long productId;
     private Long categoryId;
+    private Long storeId;
     private String productCode;
     private String productName;
     private String productType;
@@ -84,6 +85,14 @@ public class ProductDTO implements Serializable {
 
     public void setProductOptionList(List<ProductOptionDTO> productOptionList) {
         this.productOptionList = productOptionList;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
     }
 
     public Long getProductId() {

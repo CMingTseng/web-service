@@ -35,6 +35,14 @@ public class ProductRepoImpl implements ProductCustomRepo {
             sql += " AND p.product_name like CONCAT('%',:productName,'%')";
             param.put("productName", searchDTO.getProductName());
         }
+        if (!isEmpty(searchDTO.getShortDescription())) {
+            sql += " AND p.short_description like CONCAT('%',:shortDescription,'%')";
+            param.put("fullDescription", searchDTO.getShortDescription());
+        }
+        if (!isEmpty(searchDTO.getFullDescription())) {
+            sql += " AND p.full_description like CONCAT('%',:fullDescription,'%')";
+            param.put("fullDescription", searchDTO.getFullDescription());
+        }
         if (!isEmpty(searchDTO.getApproved())) {
             sql += " AND p.approved = :approved";
             param.put("approved", searchDTO.getApproved());
@@ -47,10 +55,18 @@ public class ProductRepoImpl implements ProductCustomRepo {
             sql += " AND p.status = :status";
             param.put("status", searchDTO.getStatus());
         }
+        if (!isNull(searchDTO.getCategoryId())) {
+            sql += " AND p.category_id = :categoryId";
+            param.put("categoryId", searchDTO.getCategoryId());
+        }
+        if (!isNull(searchDTO.getStoreId())) {
+            sql += " AND p.store_id = :storeId";
+            param.put("storeId", searchDTO.getStoreId());
+        }
         Query query = em.createNativeQuery(sql, Product.class);
         param.forEach(query::setParameter);
-        query.setFirstResult(startPage);
-        query.setMaxResults(pageSize);
+        query.setFirstResult(pageable.getPageNumber());
+        query.setMaxResults(pageable.getPageSize());
         return query.getResultList();
     }
 

@@ -24,21 +24,13 @@ public class ProductController {
     public Iterable<ProductDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
         return productService.findAll(predicate, pageable);
     }
-    @GetMapping(value = "/test")
-    @ResponseBody
-    public Iterable<ProductDTO> test(Product product, Pageable pageable) {
-        System.out.println();
-        return null;
-    }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
     public ResponseDTO search(ProductDTO searchDTO, Pageable pageable) {
         ResponseDTO response = new ResponseDTO(false);
         try {
-            param = Optional.ofNullable(param).orElseGet(HashMap::new);
-            ObjectMapper mapper = new ObjectMapper();
-            List<ProductDTO> productDTOList = productService.search(searchDTO, startPage, pageSize);
+            List<ProductDTO> productDTOList = productService.search(searchDTO, pageable);
             response.setSuccess(true);
             response.setObjectReturn(productDTOList);
         } catch (Exception e) {

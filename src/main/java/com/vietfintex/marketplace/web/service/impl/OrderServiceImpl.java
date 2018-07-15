@@ -9,6 +9,7 @@ import com.vietfintex.marketplace.web.dto.OrderDTO;
 import com.vietfintex.marketplace.web.dto.OrderDetailDTO;
 import com.vietfintex.marketplace.web.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,8 +50,8 @@ public class OrderServiceImpl extends AbstractService<Order, OrderDTO> implement
     }
 
     @Override
-    public List<OrderDTO> search(OrderDTO searchDTO, int startPage, int pageSize) throws Exception {
-        return orderRepo.search(searchDTO, startPage, pageSize);
+    public List<OrderDTO> search(OrderDTO searchDTO, Pageable pageable) throws Exception {
+        return orderRepo.search(searchDTO, pageable);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.vietfintex.marketplace.util.BaseMapper;
 import com.vietfintex.marketplace.web.dto.ShippingDTO;
 import com.vietfintex.marketplace.web.service.ShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +36,8 @@ public class ShippingServiceImpl extends AbstractService<Shipping, ShippingDTO> 
     }
 
     @Override
-    public List<ShippingDTO> search(ShippingDTO searchDTO, int startPage, int pageSize) throws Exception {
-        return shippingRepo.search(searchDTO, startPage, pageSize);
+    public List<ShippingDTO> search(ShippingDTO searchDTO, Pageable pageable) throws Exception {
+        return shippingRepo.search(searchDTO, pageable);
     }
 
     @Override
