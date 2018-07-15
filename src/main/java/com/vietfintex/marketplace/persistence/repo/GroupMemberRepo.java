@@ -8,5 +8,5 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface GroupMemberRepo  extends JpaRepository<GroupMember, BigInteger>, GroupMemberCustomRepo  {
-    List<GroupMemberDTO> getByUserId(Long userID);
+    List<GroupMember> getByUserId(Long userID);
 }

@@ -32,6 +32,11 @@ public class CommissionGroupServiceImpl extends AbstractService<CommissionGroup,
     }
 
     @Override
+    public CommissionGroupDTO searchCommissionGroup(Long groupId, Long productId, Long storeCategoryId, int level) {
+        return getMapper().toDtoBean(repo.findByGroupIdAndProductIdAndStoreCategoryIdAndLevel(groupId,productId,storeCategoryId, level));
+    }
+
+    @Override
     protected PagingAndSortingRepository<CommissionGroup, Long> getDao() {
         return repo;
     }

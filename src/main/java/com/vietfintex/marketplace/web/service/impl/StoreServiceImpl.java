@@ -1,5 +1,6 @@
 package com.vietfintex.marketplace.web.service.impl;
 
+import com.querydsl.core.types.Predicate;
 import com.vietfintex.marketplace.persistence.model.GroupClub;
 import com.vietfintex.marketplace.persistence.model.Store;
 import com.vietfintex.marketplace.persistence.repo.GroupClubRepo;
@@ -10,6 +11,7 @@ import com.vietfintex.marketplace.web.dto.StoreDTO;
 import com.vietfintex.marketplace.web.service.GroupClubService;
 import com.vietfintex.marketplace.web.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,11 @@ public class StoreServiceImpl  extends AbstractService<Store, StoreDTO> implemen
     @Transactional(rollbackFor = Exception.class)
     public void deleteStore(StoreDTO storeDTO) {
         repo.delete(getMapper().toPersistenceBean(storeDTO));
+    }
+
+    @Override
+    public Iterable<StoreDTO> findAll(Predicate predicate, Pageable pageable) {
+        return getMapper().toDtoBean(repo.findAll(predicate, pageable));
     }
 
     @Override
