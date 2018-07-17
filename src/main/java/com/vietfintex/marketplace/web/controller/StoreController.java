@@ -96,4 +96,22 @@ public class StoreController {
     public Iterable<StoreDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
         return storeService.findAll(predicate, pageable);
     }
+    @RequestMapping(value = "/getById/{storeId}" , method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseDTO getById(@PathVariable final Long storeId){
+        ResponseDTO responseDTO = new ResponseDTO(false);
+        responseDTO.setErrorMessage("Bad request");
+        try{
+            StoreDTO storeDTO = storeService.getByStoreId(storeId);
+            if (storeDTO != null){
+                responseDTO.setObjectReturn(storeDTO);
+                responseDTO.setSuccess(true);
+                responseDTO.setErrorMessage("");
+                return responseDTO;
+            }
+        }catch (Exception e){
+            responseDTO.setErrorMessage("Co loi xay ra "+e.toString());
+        }
+        return responseDTO;
+    }
 }

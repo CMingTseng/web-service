@@ -25,7 +25,7 @@ public class ProductController {
         return productService.findAll(predicate, pageable);
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @GetMapping
     @ResponseBody
     public ResponseDTO search(ProductDTO searchDTO, Pageable pageable) {
         ResponseDTO response = new ResponseDTO(false);

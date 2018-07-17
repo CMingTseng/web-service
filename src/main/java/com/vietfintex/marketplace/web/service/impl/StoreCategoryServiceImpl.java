@@ -57,7 +57,7 @@ public class StoreCategoryServiceImpl extends AbstractService<StoreCategory, Sto
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void storeCategoryChange(long storeId, List<Long> categoryIdList) {
-        repo.deleteAll();
+        repo.deleteByStoreId(storeId);
         repo.storeCategoryChange(storeId,categoryIdList);
     }
 }

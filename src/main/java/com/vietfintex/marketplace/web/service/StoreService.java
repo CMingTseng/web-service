@@ -10,6 +10,7 @@ import java.util.List;
 public interface StoreService extends IOperations<Store, StoreDTO> {
     List<StoreDTO> getStoreList(Long storeId, Long ownerId, String storeName, String address, Integer page);
     StoreDTO insertOrUpdateStore(StoreDTO storeDTO);
+    StoreDTO getByStoreId(Long storeId);
     void deleteStore(StoreDTO storeDTO);
     Iterable<StoreDTO> findAll(Predicate predicate, Pageable pageable);
 }

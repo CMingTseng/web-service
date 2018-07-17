@@ -37,6 +37,11 @@ public class StoreServiceImpl  extends AbstractService<Store, StoreDTO> implemen
     }
 
     @Override
+    public StoreDTO getByStoreId(Long storeId) {
+        return getMapper().toDtoBean(repo.findById(storeId).orElse(null));
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteStore(StoreDTO storeDTO) {
         repo.delete(getMapper().toPersistenceBean(storeDTO));
