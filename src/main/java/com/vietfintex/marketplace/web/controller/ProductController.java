@@ -19,11 +19,11 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping
-    @ResponseBody
-    public Iterable<ProductDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
-        return productService.findAll(predicate, pageable);
-    }
+//    @GetMapping
+//    @ResponseBody
+//    public Iterable<ProductDTO> findAll(@QuerydslPredicate(root = Product.class) Predicate predicate, Pageable pageable) {
+//        return productService.findAll(predicate, pageable);
+//    }
 
     @GetMapping
     @ResponseBody
