@@ -107,6 +107,10 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
+    @Column(name = "refund_term")
+    private String refundTerm;
+    @Column(name = "product_group_type")
+    private String productGroupType;
 
     public Product() {
     }
@@ -362,6 +366,22 @@ public class Product implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRefundTerm() {
+        return refundTerm;
+    }
+
+    public void setRefundTerm(String refundTerm) {
+        this.refundTerm = refundTerm;
+    }
+
+    public String getProductGroupType() {
+        return productGroupType;
+    }
+
+    public void setProductGroupType(String productGroupType) {
+        this.productGroupType = productGroupType;
     }
 
     @Override

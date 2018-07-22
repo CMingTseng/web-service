@@ -15,7 +15,7 @@ public class StoreCustomRepoImpl implements StoreCustomRepo {
     private EntityManager em;
 
     @Override
-    public List<Store> getStoreList(Long storeId, Long ownerId, String storeName, String address,Integer page) {
+    public List<Store> getStoreList(Long storeId, Long ownerId, String storeName, String address,Integer page, Double lat, Double lon) {
         String sql ="SELECT s.* FROM store s WHERE 1= 1 ";
         Map<String, Object> param = new HashMap<>();
         if(storeId != null){
@@ -33,6 +33,13 @@ public class StoreCustomRepoImpl implements StoreCustomRepo {
         if(address != null){
             sql += " AND s.address LIKE CONCAT('%',:address,'%')  ";
             param.put("address",address);
+        }
+        if (lat != null && lon != null){
+            sql += " ORDER BY sqrt(pow((:lat - s.latitude),2) + pow((:lon - s.longitude),2))";
+            param.put("lat",lat);
+            param.put("lon",lon);
+        }else{
+            sql += " ORDER BY RAND() ";
         }
         Query query = em.createNativeQuery(sql,Store.class);
         if (page!= null)

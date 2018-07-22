@@ -30,7 +30,7 @@ public class StoreController {
                 StoreDTO storeDTO = storeWrapDTO.getStoreDTO();
                 if(storeDTO!= null){
                     List<StoreDTO> storeDTOList = storeService.getStoreList(storeDTO.getStoreId(),
-                            storeDTO.getOwnerId(),storeDTO.getStoreName(),storeDTO.getAddress(),storeWrapDTO.getPage());
+                            storeDTO.getOwnerId(),storeDTO.getStoreName(),storeDTO.getAddress(),storeWrapDTO.getPage(), storeDTO.getLatitude(),storeDTO.getLongitude());
                     List<StoreDTO> returnObject = new ArrayList<>();
                     if(storeDTOList != null){
                         for (StoreDTO item : storeDTOList){

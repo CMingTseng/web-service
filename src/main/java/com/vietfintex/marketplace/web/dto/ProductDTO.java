@@ -49,6 +49,8 @@ public class ProductDTO implements Serializable {
     private String variationCode;
     private String variationOption;
     private String status;
+    private String refundTerm;
+    private String productGroupType;
     private List<ProductFeatureDTO> productFeatureList;
     private List<ProductOptionDTO> productOptionList;
     private StoreDTO store;
@@ -310,6 +312,22 @@ public class ProductDTO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRefundTerm() {
+        return refundTerm;
+    }
+
+    public void setRefundTerm(String refundTerm) {
+        this.refundTerm = refundTerm;
+    }
+
+    public String getProductGroupType() {
+        return productGroupType;
+    }
+
+    public void setProductGroupType(String productGroupType) {
+        this.productGroupType = productGroupType;
     }
 
     @Override

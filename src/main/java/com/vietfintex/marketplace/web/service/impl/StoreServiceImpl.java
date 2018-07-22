@@ -26,8 +26,8 @@ public class StoreServiceImpl  extends AbstractService<Store, StoreDTO> implemen
     private StoreRepo repo;
 
     @Override
-    public List<StoreDTO> getStoreList(Long storeId, Long ownerId, String storeName, String address, Integer page) {
-        return getMapper().toDtoBean(repo.getStoreList(storeId,ownerId,storeName,address,page));
+    public List<StoreDTO> getStoreList(Long storeId, Long ownerId, String storeName, String address, Integer page, Double lat, Double lon) {
+        return getMapper().toDtoBean(repo.getStoreList(storeId,ownerId,storeName,address,page, lat, lon));
     }
 
     @Override

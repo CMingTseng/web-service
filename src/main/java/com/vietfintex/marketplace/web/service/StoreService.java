@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface StoreService extends IOperations<Store, StoreDTO> {
-    List<StoreDTO> getStoreList(Long storeId, Long ownerId, String storeName, String address, Integer page);
+    List<StoreDTO> getStoreList(Long storeId, Long ownerId, String storeName, String address, Integer page, Double lat, Double lon);
     StoreDTO insertOrUpdateStore(StoreDTO storeDTO);
     StoreDTO getByStoreId(Long storeId);
     void deleteStore(StoreDTO storeDTO);
